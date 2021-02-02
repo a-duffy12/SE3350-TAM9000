@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "fName": "Billy",
+    "lName": "Jones",
+    "email": "bjone96@uwo.ca",
+    "password": "BillyJonesIsCool",
+    "type": "student",
+    "idNo": 123456789,
+    "hours": 0,
+    "isAssigned": false
+  },
+  {
+    "fName": "Roy",
+    "lName": "Jippers",
+    "email": "rjipp3@uwo.ca",
+    "password":"BestInstructorNA",
+    "type": "instructor",
+    "idNo": 111111111,
+    "hours": null,
+    "isAssigned": null
+  }
+]
