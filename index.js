@@ -4,6 +4,14 @@ const cors = require("cors"); // get cors module
 const stringSimilarity = require("string-similarity"); // get string similarity module
 const bcrypt = require("bcrypt"); // get hashing module
 
+const userData = require("./data/accounts.json"); // json data for user accounts
+const appsData = require("./data/applications.json"); // json data for user applications
+const courseData = require("./data/courses.json"); // json data for courses
+
+const userFile = "./data/accounts.json"; // file holding json data for user accounts
+const appsFile = "./data/applications.json"; // file holding json data for applications
+const courseFile = "./data/applications.json"; // file holding json data for courses
+
 const salt = 12;
 
 const app = express(); // create app constant
@@ -24,6 +32,65 @@ app.use((req, res, next) => { // middleware function to do console logs
     console.log(`${req.method} request for ${req.url}`); // print to console
     next(); // continue processeing
 });
+
+
+// search for a user account GET
+router.get("/users/:email", (req, res) => {
+
+    if (sanitizeEmail(req.params.email))
+    {
+        udata = getData(userData); // get user account data
+
+        const ind = udata.findIndex(u => u.email === req.params.email); // find index of the user's account
+    
+        if (ind >= 0) // if the user exists
+        {
+            res.send(udata[ind]);
+        }
+        else if (ind < 0)
+        {
+            res.status(400).send(`User with email: ${req.params.email} does not exist`);
+        }
+    }
+    else
+    {
+        res.status(400).send("Invalid input!");
+    }
+});
+
+// create an account POST
+router.post("/users/:email", (req, res) => {
+
+    if (sanitizeEmail(req.params.email) && sanitizePass(req.body))
+    {
+        udata = getData(userData); // get user account data
+
+        const ind = udata.findIndex(u => u.email === req.params.email); // find index of the user
+
+        if (ind >= 0) // if the user exists
+        {
+            res.status(400).send(`User with email: ${req.params.email} already exists!`); 
+        }
+        else if (ind < 0) // if the user does not exist
+        {
+            let newUser = req.body; // empty object for new user
+            newUser.email = req.params.email; // set email field for new user
+
+            bcrypt.hash(newUser.password, salt, (err, hash) => { // encrypt password
+
+                newUser.password = hash; // set password to encrypted version
+                udata.push(newUser); // add new user to array of users
+                res.send(`Created user account with email: ${req.params.email}`);
+                setData(udata, userFile); // send updated user data array to JSON file
+            });
+        }
+    }
+    else
+    {
+        res.status(400).send("Invalid input!");
+    }
+});
+
 
 // test hash value
 router.get("/test/:password", (req, res) => {
