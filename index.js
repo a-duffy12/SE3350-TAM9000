@@ -174,8 +174,8 @@ router.put("/users/:email", (req, res) => {
 });
 
 // Create a new course for instructors
-crouter.route("/courses/:coursename")
-    .post((rew,res)=>{
+router.route("/courses/:coursename")
+    .post((req,res)=>{
 
 
         
