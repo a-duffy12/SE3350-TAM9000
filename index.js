@@ -91,6 +91,91 @@ router.post("/users/:email", (req, res) => {
     }
 });
 
+// log in to an account POST
+router.post("/users/login/:email", (req, res) => {
+
+    if (sanitizeEmail(req.params.email) && sanitizePass(req.body)) 
+    {
+        udata = getData(userData); // get user account data
+
+        const ind = udata.findIndex(u => u.email === req.params.email); // find index of the exisitng user with the given email
+    
+        if (ind >= 0) // if the user exists
+        {
+            bcrypt.compare(req.body.password, udata[ind].password, (err, result) => { // comapre the values of the two hashes
+
+                if (result) // password matches the saved one
+                {
+                    res.send(true);
+                }
+                else if (!result) // password does not match the saved one
+                {
+                    res.status(400).send(`Incorrect password for user with email: ${req.params.email}!`);
+                }
+            }); 
+        }
+        else if (ind < 0) // if the user does not exist
+        {
+            res.status(400).send(`User with email: ${req.params.email} does not exist!`);
+        }
+    }  
+    else
+    {
+        res.status(400).send("Invalid input!");
+    }       
+});
+
+// change account password PUT
+router.put("/users/:email", (req, res) => {
+
+    // send user object to file
+    if (sanitizeEmail(req.params.email) && sanitizePass(req.body)) 
+    {
+        udata = getData(userData); // get user account data
+
+        const ind = udata.findIndex(u => u.email === req.params.email); // find index of the exisitng user with the given email
+    
+        if (ind >= 0) // if the user exists
+        {
+            if (req.body.old_password === req.body.password)
+            {
+                res.status(400).send(`Cannot change password to your existing password for user with email: ${req.params.email}!`);
+            }
+            else
+            {
+                bcrypt.compare(req.body.old_password, udata[ind].password, (err, result) => { // check if the old password matches the accounts current password
+
+                    if (result)
+                    {
+                        bcrypt.hash(req.body.password, salt, (err, hash) => { // hash new password
+    
+                            req.body.password = hash; // set new password to hashed value
+                            udata[ind].password = req.body.password; // set password to the new password
+                            res.send(`Updated password for user with email: ${req.params.email}`);
+                            setData(udata, userFile); // send updated user data array to JSON file
+                        });  
+                    }
+                    else if (!result)
+                    {
+                        res.status(400).send(`Incorrect password for user with email: ${req.params.email}!`);
+                    }
+                });
+            }
+        }
+        else if (ind < 0) // if the user does not exist
+        {
+            res.status(400).send(`User with email: ${req.params.email} does not exist!`);
+        }
+    }  
+    else
+    {
+        res.status(400).send("Invalid input!");
+    }
+});
+
+
+
+
 
 // test hash value
 router.get("/test/:password", (req, res) => {
