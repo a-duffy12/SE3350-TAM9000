@@ -20,6 +20,8 @@ export class LoginComponent implements OnInit {
   email = '';
   password = '';
   passwordCheck = '';
+  oldPassword = '';
+  oldPasswordCheck = '';
   fName = '';
   lName = '';
   type = '';
@@ -58,7 +60,7 @@ export class LoginComponent implements OnInit {
       }));
     }
     else {
-      alert('Missing inputs!');
+      alert('Missing or invalid inputs!');
     }
   }
 
@@ -70,7 +72,7 @@ export class LoginComponent implements OnInit {
 
   newUser(): void {
 
-    if (this.val.validateNum(this.id, 0, 999999999) && this.password == this.passwordCheck && this.type == ("student" || "instructor") && String(this.id).length == 9)
+    if (this.email && this.password && this.passwordCheck && this.fName && this.lName && this.id && this.type && this.val.validateNum(this.id, 0, 999999999) && this.password == this.passwordCheck && this.type == ("student" || "instructor") && String(this.id).length == 9)
     {
 
       if (this.type == "student")
@@ -101,7 +103,27 @@ export class LoginComponent implements OnInit {
       }))
     }
     else {
-      alert('Missing or incorrect inputs!');
+      alert('Missing or invalid inputs!');
+    }
+  }
+
+  changePassword(): void {
+
+    if (this.password && this.passwordCheck && this.oldPassword && this.oldPasswordCheck && this.password == this.passwordCheck && this.oldPassword == this.oldPasswordCheck && this.password != this.oldPassword)
+    {
+      const body = {
+        old_password: this.oldPassword,
+        password: this.password
+      }
+
+      this.http.put(`/api/users/${this.val.getActiveUser()}`, body, this.options).subscribe(() => {
+        alert('Changed password successfully');
+      }, (err => {
+        alert(err.error);
+      }))
+    }
+    else {
+      alert('Missing or invalid inputs!');
     }
   }
 

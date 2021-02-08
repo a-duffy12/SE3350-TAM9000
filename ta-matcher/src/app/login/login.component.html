@@ -23,4 +23,13 @@
 
 <div *ngIf="loggedIn">
   <button (click)="logoutUser()">Log out</button>
+
+  <h2>Change your password</h2>
+
+  Existing Password: <input placeholder="enter existing password..." type="password" [(ngModel)]="oldPassword"><br><br>
+  Confirm Existing Password: <input placeholder="enter existing password again..." type="password" [(ngModel)]="oldPasswordCheck"><br><br>
+  New Password: <input placeholder="enter new password..." type="password" [(ngModel)]="password"><br><br>
+  Confirm New Password: <input placeholder="enter new password again..." type="password" [(ngModel)]="passwordCheck"><br><br>
+
+  <button (click)="changePassword()">Update Password</button>
 </div>
