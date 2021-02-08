@@ -1,22 +1,22 @@
 [
-  {
-    "fName": "Billy",
-    "lName": "Jones",
-    "email": "bjone96@uwo.ca",
-    "password": "$2b$12$4QrE6gwmFhv7fB/DLuwwIerPs4rhNC8WJohg1zO2Rm1m4AV7dOp0u",
-    "type": "student",
-    "idNo": 123456789,
-    "hours": 0,
-    "isAssigned": false
+    {
+      "fName": "Roy",
+      "lName": "Jippers",
+      "email": "rjipp3@uwo.ca",
+      "password": "$2b$12$YkcTEzXiZ8d1p20MWu9jmOYZI2Phtmk4TLDx097hKBg.wV4UxXRoG",
+      "type": "instructor",
+      "idNo": 111111111,
+      "hours": null,
+      "isAssigned": null
   },
-  {
-    "fName": "Roy",
-    "lName": "Jippers",
-    "email": "rjipp3@uwo.ca",
-    "password":"$2b$12$YkcTEzXiZ8d1p20MWu9jmOYZI2Phtmk4TLDx097hKBg.wV4UxXRoG",
-    "type": "instructor",
-    "idNo": 111111111,
-    "hours": null,
-    "isAssigned": null
-  }
+    {
+        "fName": "Billy",
+        "lName": "Jones",
+        "email": "bjone96@uwo.ca",
+        "password": "$2b$12$4QrE6gwmFhv7fB/DLuwwIerPs4rhNC8WJohg1zO2Rm1m4AV7dOp0u",
+        "type": "student",
+        "idNo": 123456789,
+        "hours": 0,
+        "isAssigned": false
+    }  
 ]
