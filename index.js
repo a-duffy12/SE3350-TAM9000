@@ -10,7 +10,7 @@ const courseData = require("./data/courses.json"); // json data for courses
 
 const userFile = "./data/accounts.json"; // file holding json data for user accounts
 const appsFile = "./data/applications.json"; // file holding json data for applications
-const courseFile = "./data/applications.json"; // file holding json data for courses
+const courseFile = "./data/courses.json"; // file holding json data for courses
 
 const salt = 12;
 
