@@ -173,18 +173,40 @@ router.put("/users/:email", (req, res) => {
     }
 });
 
-// Create a new course for instructors
+// Create a new course for instructors (course code, instructor, hours, questions)
 router.route("/courses/:coursename")
     .post((req,res)=>{
 
+        if (sanitizeInput(req.params.coursename) && sanitizeInput(req.body))
+        {
+        cdata = getData(courseData); // get course data
 
-        
+        const ind = cdata.findIndex(c => c.coursename === req.params.coursename); // find index of the the course if it exists
+
+        if (ind >= 0) // if the course already exists
+        {
+            res.status(400).send(`The course: ${req.params.coursename} already exists!`); 
+        }
+        else if (ind < 0) // if the course does not exist
+        {
+            let newCourse = req.body; // empty object
+            newCourse.courseName = req.params.coursename; // set course name
+            newCourse.instructor = req.body.instructor; // set instructor
+            newCourse.hours = req.body.hours; // set hours
+            newCourse.enrolled = req.body.enrolled; // set number of students enrolled
+            newCourse.desc = req.body.desc; // set description
+
+            cdata.push(newCourse); // add the new course
+            res.send(`Created course: ${req.params.coursename}`); // send message
+            setData(cdata, courseFile); // send updated course data to JSON file
+            
+        }
+        }
+        else
+        {
+            res.status(400).send("Invalid input!");
+        }        
     })
-
-
-
-
-
 
 
 // test hash value
