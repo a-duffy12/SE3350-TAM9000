@@ -1,0 +1,35 @@
+<div *ngIf="!loggedIn">
+
+  <h2>Log in to an account</h2>
+
+  Email: <input placeholder="enter email..." [(ngModel)]="email"><br><br>
+  Password: <input placeholder="enter password..." type="password" [(ngModel)]="password"><br><br>
+
+  <button (click)="loginUser()">Log in</button>
+
+  <h2>Create an account</h2>
+
+  Email: <input placeholder="enter email..." [(ngModel)]="email"><br><br>
+  Password: <input placeholder="enter password..." type="password" [(ngModel)]="password"><br><br>
+  Confirm Password: <input placeholder="enter password again..." type="password" [(ngModel)]="passwordCheck"><br><br>
+  First Name: <input placeholder="enter first name..." [(ngModel)]="fName"><br><br>
+  Last Name: <input placeholder="enter last name..." [(ngModel)]="lName"><br><br>
+  Account Type: <input placeholder="enter 'student' or 'instructor'..." [(ngModel)]="type"><br><br>
+  Western ID: <input placeholder="enter 9-digit id..." type="number" [(ngModel)]="id"><br><br>
+
+  <button (click)="newUser()">Register</button>
+
+</div>
+
+<div *ngIf="loggedIn">
+  <button (click)="logoutUser()">Log out</button>
+
+  <h2>Change your password</h2>
+
+  Existing Password: <input placeholder="enter existing password..." type="password" [(ngModel)]="oldPassword"><br><br>
+  Confirm Existing Password: <input placeholder="enter existing password again..." type="password" [(ngModel)]="oldPasswordCheck"><br><br>
+  New Password: <input placeholder="enter new password..." type="password" [(ngModel)]="password"><br><br>
+  Confirm New Password: <input placeholder="enter new password again..." type="password" [(ngModel)]="passwordCheck"><br><br>
+
+  <button (click)="changePassword()">Update Password</button>
+</div>

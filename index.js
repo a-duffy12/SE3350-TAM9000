@@ -199,7 +199,7 @@ function getData(fileRef)
 // function to write to JSON file after each update to sdata array
 function setData(array, file)
 {
-    fs.writeFile(file, JSON.stringify(array), error => {
+    fs.writeFile(file, JSON.stringify(array, undefined, 4), error => {
 
         if (error) // if an error is thrown when writing
         {
