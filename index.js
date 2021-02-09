@@ -208,6 +208,11 @@ router.route("/courses/:coursename")
         }        
     })
 
+// get all courses
+router.get("/courses", (req, res) => {
+    res.send(getData(courseData)); // get all courses data
+});
+
 
 // test hash value
 router.get("/test/:password", (req, res) => {
