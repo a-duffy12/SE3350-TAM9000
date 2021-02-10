@@ -17,7 +17,10 @@ export class InstructorViewComponent implements OnInit {
   catalog = '';
   subject = '';
   extension = '';
-
+  instructor='';
+  hours='';
+  numstudent='';
+  desc='';
 
   constructor(private http: HttpClient, private val: Validator)
   {
@@ -39,6 +42,7 @@ export class InstructorViewComponent implements OnInit {
           }
         })
       }
+      console.log(this.instruct);
     });
   }
 
