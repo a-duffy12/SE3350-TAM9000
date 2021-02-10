@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { Subscription, interval} from 'rxjs';
 import { Validator } from '../validator.service';
 
 @Component({
@@ -15,7 +17,29 @@ export class ApplicationComponent implements OnInit {
   @Input() courseTAd: Boolean | undefined;
   @Input() prevExp: string | undefined;
 
-  constructor(public validator: Validator) {
+  sub: Subscription;
+  activeUser = "";
+  isStudent: Boolean = false;
+
+  constructor(private http: HttpClient, public validator: Validator) {
+    this.sub = interval(100).subscribe(() => {
+      this.activeUser = this.validator.getActiveUser();
+
+      if (this.activeUser)
+      {
+        // check to see if this user is a student
+        this.http.get(`/api/users/${this.activeUser}`).subscribe((data:any) => {
+          if (data.type === "student") // if user is a student
+          {
+            this.isStudent = true;
+          }
+          else // if user is not a student
+          {
+            this.isStudent = false;
+          }
+        })
+      }
+    });
   }
 
   ngOnInit(): void {
