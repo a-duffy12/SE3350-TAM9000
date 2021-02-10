@@ -28,5 +28,15 @@
         "hours": 0,
         "isAssigned": false,
         "email": "aduffy22@uwo.ca"
+    },
+    {
+        "password": "$2b$12$OUMAwEnv5sk2j546Rss.TeslBNYTFEHe7LvngHpHZfYcEnWTiliPC",
+        "fName": "Aiden",
+        "lName": "Duffy",
+        "idNo": 214800152,
+        "type": "instructor",
+        "hours": null,
+        "isAssigned": null,
+        "email": "12aduffy@gmail.com"
     }
 ]

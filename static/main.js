@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! H:\Github\SE3350-TAM900\ta-matcher\src\main.ts */"zUnb");
+module.exports = __webpack_require__(/*! C:\Users\Aiden\git\SE3350-TAM900\ta-matcher\src\main.ts */"zUnb");
 
 
 /***/ }),
@@ -476,7 +476,7 @@ class LoginComponent {
         this.val.setActiveUser('');
     }
     newUser() {
-        if (this.email && this.password && this.passwordCheck && this.fName && this.lName && this.id && this.type && this.val.validateNum(this.id, 0, 999999999) && this.password == this.passwordCheck && this.type == ("student" || false) && String(this.id).length == 9) {
+        if (this.email && this.password && this.passwordCheck && this.fName && this.lName && this.id && this.type && this.val.validateNum(this.id, 0, 999999999) && this.password == this.passwordCheck && (this.type == "student" || this.type == "instructor") && String(this.id).length == 9) {
             if (this.type == "student") {
                 this.hours = 0;
                 this.ass = false;

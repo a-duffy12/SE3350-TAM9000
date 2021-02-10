@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
 
   newUser(): void {
 
-    if (this.email && this.password && this.passwordCheck && this.fName && this.lName && this.id && this.type && this.val.validateNum(this.id, 0, 999999999) && this.password == this.passwordCheck && this.type == ("student" || "instructor") && String(this.id).length == 9)
+    if (this.email && this.password && this.passwordCheck && this.fName && this.lName && this.id && this.type && this.val.validateNum(this.id, 0, 999999999) && this.password == this.passwordCheck && (this.type == "student" || this.type == "instructor") && String(this.id).length == 9)
     {
 
       if (this.type == "student")
