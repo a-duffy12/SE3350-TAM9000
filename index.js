@@ -173,7 +173,25 @@ router.put("/users/:email", (req, res) => {
     }
 });
 
-
+// submit TA application PUT
+router.post("/application/:email", (req, res) => {
+    if(sanitizeEmail(req.params.email)){
+        const email = req.params.email;
+        const answers = req.body;
+        const appsJSON = JSON.parse(JSON.stringify(appsData))
+        // TODO: check if the course exists before writing to the application JSON
+        let TAapplication = {
+            email: email,
+            baseQuestions: answers.base
+        };
+        appsJSON.push(TAapplication);
+        res.send("Application submitted");
+        setData(appsJSON,appsFile);
+    }
+    else{
+        res.status(400).send("Invalid Email");
+    }
+})
 
 
 
