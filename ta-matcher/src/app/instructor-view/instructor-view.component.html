@@ -1,1 +1,5 @@
-<p>instructor-view works!</p>
+<div *ngIf = "instruct">
+    Subject: <input placeholder="ex. SE" [(ngModel)]="subject"><br><br>
+    Catalog: <input placeholder="ex. 3350" [(ngModel)]="catalog"><br><br>
+    Extension: <input placeholder="ex. A,B" [(ngModel)]="extension"><br><br>
+</div>
