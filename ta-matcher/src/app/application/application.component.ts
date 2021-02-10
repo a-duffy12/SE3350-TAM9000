@@ -20,6 +20,7 @@ export class ApplicationComponent implements OnInit {
   sub: Subscription;
   activeUser = "";
   isStudent: Boolean = false;
+  studentEmail: string | undefined;
 
   constructor(private http: HttpClient, public validator: Validator) {
     this.sub = interval(100).subscribe(() => {
@@ -32,6 +33,7 @@ export class ApplicationComponent implements OnInit {
           if (data.type === "student") // if user is a student
           {
             this.isStudent = true;
+            this.studentEmail = data.email;
           }
           else // if user is not a student
           {
@@ -46,11 +48,11 @@ export class ApplicationComponent implements OnInit {
   }
 
   submitApplication(){
-    console.log(this.course);
-    console.log(this.courseTaken);
-    console.log(this.courseLoc);
-    console.log(this.courseTAd);
-    console.log(this.prevExp);
+    if(confirm("Are you sure to submit this application?")){
+      this.http.post<any>(`/api/application/${this.studentEmail}`, {base: [this.course, this.courseTaken, this.courseLoc,this.courseTAd, this.prevExp]}).subscribe((data:any) => {
+        alert("Application submitted");
+      })
+    }
   }
 
 }
