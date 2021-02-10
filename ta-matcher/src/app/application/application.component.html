@@ -1,0 +1,28 @@
+<div class="form" *ngIf="this.validator.getActiveUser().length > 0">
+  <h2>Apply</h2>
+  <div>
+    Course:
+    <input [(ngModel)]="course" placeholder="Course e.g. SE2202A">
+  </div>
+  <div>
+    Have you taken this course before?
+    <select [(ngModel)]="courseTaken">
+      <option *ngFor="let x of options" [ngValue]="x.value">{{x.display}}</option>
+    </select>
+  </div>
+  <div *ngIf="courseTaken == true">
+    Where did you take this course?
+    <input [(ngModel)]="courseLoc" placeholder="University e.g. Western University">
+  </div>
+  <div>
+    Have you TA'd this course before?
+    <select [(ngModel)]="courseTAd">
+      <option *ngFor="let x of options" [ngValue]="x.value">{{x.display}}</option>
+    </select>
+  </div>
+  <div>
+    List any previous TA experience
+    <textarea [(ngModel)]="prevExp"></textarea>
+  </div>
+  <button (click)="submitApplication()">Submit</button>
+</div>

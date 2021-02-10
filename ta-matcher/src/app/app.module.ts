@@ -6,12 +6,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { appRoutingModule } from './app.routing';
-import { Validator } from './validator.service'
+import { Validator } from './validator.service';
+import { ApplicationComponent } from './application/application.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    ApplicationComponent
   ],
   imports: [
     BrowserModule,
