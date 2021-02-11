@@ -14,13 +14,14 @@ export class InstructorViewComponent implements OnInit {
   sub: Subscription;
   activeUser = '';
   instruct = false;
-  catalog = '';
-  subject = '';
-  extension = '';
-  instructor='';
-  hours='';
-  numstudent='';
-  desc='';
+  catalog = ''; // make upper case
+  subject = ''; // make upper case
+  extension = ''; // make upper case
+  instructor=''; // get from active account
+  instructorEmail=''; // get from active account
+  hours=0;
+  numstudent=0;
+  desc=''; // make descriptions upper case before sending to back end
 
   constructor(private http: HttpClient, private val: Validator)
   {

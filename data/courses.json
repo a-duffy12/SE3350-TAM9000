@@ -1,1 +1,10 @@
-[]
+[
+    {
+        "courseName": "SE3350B",
+        "instructor": "Aiden Duffy",
+        "instructorEmail": "12aduffy@gmail.com",
+        "hours": 20,
+        "enrolled": 100,
+        "desc": "SOFTWARE ENGINEERING DESIGN 3"
+    }
+]

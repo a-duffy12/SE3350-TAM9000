@@ -174,39 +174,93 @@ router.put("/users/:email", (req, res) => {
 });
 
 // Create a new course for instructors (course code, instructor, hours, questions)
-router.route("/courses/:coursename")
+router.route("/courses/:courseName")
     .post((req,res)=>{
 
-        if (sanitizeInput(req.params.coursename) && sanitizeInput(req.body))
+        if (sanitizeInput(req.params.courseName) && sanitizeInput(req.body))
         {
-        cdata = getData(courseData); // get course data
+            cdata = getData(courseData); // get course data
 
-        const ind = cdata.findIndex(c => c.coursename === req.params.coursename); // find index of the the course if it exists
+            const ind = cdata.findIndex(c => c.courseName === req.params.courseName); // find index of the the course if it exists
 
-        if (ind >= 0) // if the course already exists
-        {
-            res.status(400).send(`The course: ${req.params.coursename} already exists!`); 
-        }
-        else if (ind < 0) // if the course does not exist
-        {
-            let newCourse = req.body; // empty object
-            newCourse.courseName = req.params.coursename; // set course name
-            newCourse.instructor = req.body.instructor; // set instructor
-            newCourse.hours = req.body.hours; // set hours
-            newCourse.enrolled = req.body.enrolled; // set number of students enrolled
-            newCourse.desc = req.body.desc; // set description
+            if (ind >= 0) // if the course already exists
+            {
+                res.status(400).send(`The course: ${req.params.courseName} already exists!`); 
+            }
+            else if (ind < 0) // if the course does not exist
+            {
+                let newCourse = {}; // empty object
+                newCourse.courseName = req.params.courseName; // set course name
+                newCourse.instructor = req.body.instructor; // set instructor
+                newCourse.instructorEmail = req.body.instructorEmail; // set instructor email
+                newCourse.hours = req.body.hours; // set hours
+                newCourse.enrolled = req.body.enrolled; // set number of students enrolled
+                newCourse.desc = req.body.desc; // set description
 
-            cdata.push(newCourse); // add the new course
-            res.send(`Created course: ${req.params.coursename}`); // send message
-            setData(cdata, courseFile); // send updated course data to JSON file
-            
-        }
+                cdata.push(newCourse); // add the new course
+                res.send(`Created course: ${req.params.courseName}`); // send message
+                setData(cdata, courseFile); // send updated course data to JSON file
+            }
         }
         else
         {
             res.status(400).send("Invalid input!");
         }        
     })
+    .get((req, res) => { // search by course name
+        if (sanitizeInput(req.params.courseName))
+        {
+            cdata = getData(courseData); // get up to date course data
+
+            const ind = cdata.findIndex(c => c.courseName === req.params.courseName); // find index of course
+
+            if (ind >= 0) // if the course exists
+            {
+                res.send(cdata[ind]); // send the course
+            }
+            else if (ind < 0) // if the course does not exist
+            {
+                res.status(404).send(`No course found with course name: ${req.params.courseName}`);
+            }
+        }
+        else
+        {
+            res.status(400).send("Invalid input!");
+        }
+    })
+
+// search course descriptions GET
+router.get("/courses/key/:keyword", (req, res) => {
+
+    let courses = []; // empty array to hold results
+        const key = new RegExp(req.params.keyword, 'g');
+
+    if (sanitizeInput(req.params.keyword, 50) && req.params.keyword.length >= 4)
+    {
+        cdata = getData(courseData); // get current course data
+
+        for (c in cdata)
+        {
+            if (String(cdata[c].desc).match(key) || stringSimilarity.compareTwoStrings(req.params.keyword, String(cdata[c].desc)) > 0.5) // if the keyword matches a course description
+            {
+                courses.push(cdata[c]); // add course to array
+            }
+        }
+    }
+    else
+    {
+        res.status(400).send("Invalid input!");
+    }
+
+    if (courses.length > 0) // if there were results found
+    {
+        res.send(courses); // send results
+    }
+    else if (courses.length <= 0) // if no results were found
+    {
+        res.status(404).send(`No courses found with descriptions similar to: ${req.params.keyword}`);
+    }
+})
 
 // get all courses
 router.get("/courses", (req, res) => {
