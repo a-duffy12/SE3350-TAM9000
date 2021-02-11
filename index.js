@@ -228,6 +228,32 @@ router.route("/courses/:courseName")
             res.status(400).send("Invalid input!");
         }
     })
+// submit TA application PUT
+router.post("/application/:email", (req, res) => {
+    if(sanitizeEmail(req.params.email)){
+        const email = req.params.email;
+        const answers = req.body;
+        const appsJSON = JSON.parse(JSON.stringify(appsData));
+        // TODO: check if the course exists before writing to the application JSON
+        const courseJSON = JSON.parse(JSON.stringify(courseData));
+        const courseExists = appsJSON.findIndex(c => c.courseName == answers.base[0]);
+        if(courseExists > 0){            
+            let TAapplication = {
+                email: email,
+                baseQuestions: answers.base
+            };
+            appsJSON.push(TAapplication);
+            res.send("Application submitted");
+            setData(appsJSON,appsFile);
+        }
+        else{
+            res.status(400).send("Course does not exist");
+        }
+    }
+    else{
+        res.status(400).send("Invalid Email");
+    }
+})
 
 // search course descriptions GET
 router.get("/courses/key/:keyword", (req, res) => {
