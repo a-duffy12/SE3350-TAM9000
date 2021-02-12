@@ -41,6 +41,10 @@ export class ApplicationComponent implements OnInit {
           }
         })
       }
+      else
+      {
+        this.isStudent = false;
+      }
     });
   }
 

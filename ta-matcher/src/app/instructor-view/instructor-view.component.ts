@@ -47,6 +47,10 @@ export class InstructorViewComponent implements OnInit {
           }
         })
       }
+      else
+      {
+        this.instruct = false;
+      }
       console.log(this.instruct);
     });
   }
