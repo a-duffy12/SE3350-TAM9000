@@ -270,7 +270,7 @@ router.post("/application/:email", (req, res) => {
         const appsJSON = JSON.parse(JSON.stringify(appsData));
         // TODO: check if the course exists before writing to the application JSON
         const courseJSON = JSON.parse(JSON.stringify(courseData));
-        const courseExists = appsJSON.findIndex(c => c.courseName == answers.base[0]);
+        const courseExists = courseJSON.findIndex(c => c.courseName == answers.base[0]);
         if(courseExists > 0){            
             let TAapplication = {
                 email: email,
