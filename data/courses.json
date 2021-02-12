@@ -6,5 +6,13 @@
         "hours": 20,
         "enrolled": 100,
         "desc": "SOFTWARE ENGINEERING DESIGN 3"
+    },
+    {
+        "courseName": "SE3316A",
+        "instructor": "Aiden Duffy",
+        "instructorEmail": "12aduffy@gmail.com",
+        "hours": 10,
+        "enrolled": 150,
+        "desc": "HELL ON EARTH"
     }
 ]

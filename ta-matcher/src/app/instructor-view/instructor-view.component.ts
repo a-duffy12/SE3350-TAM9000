@@ -11,6 +11,9 @@ import { Subscription, interval, Observable } from 'rxjs';
 })
 export class InstructorViewComponent implements OnInit {
 
+  header = { 'Content-Type': 'application/json' };
+  options = ({ headers: this.header });
+
   sub: Subscription;
   activeUser = '';
   instruct = false;
@@ -18,10 +21,10 @@ export class InstructorViewComponent implements OnInit {
   subject = ''; // make upper case
   extension = ''; // make upper case
   instructor=''; // get from active account
-  instructorEmail=''; // get from active account
   hours=0;
-  numstudent=0;
+  numStudent=0;
   desc=''; // make descriptions upper case before sending to back end
+  instructorName='';
 
   constructor(private http: HttpClient, private val: Validator)
   {
@@ -36,6 +39,7 @@ export class InstructorViewComponent implements OnInit {
           if (data.type === "instructor") // if user is an admin
           {
             this.instruct = true; // reveal admin level content
+            this.instructorName = data.fName + " " + data.lName; // build instructor name
           }
           else // if user is not an admin
           {
@@ -45,6 +49,27 @@ export class InstructorViewComponent implements OnInit {
       }
       console.log(this.instruct);
     });
+  }
+
+  addCourse(): void {
+    if (this.instruct && this.subject && this.catalog && this.extension && this.hours && this.numStudent && this.desc && this.instructorName)
+    {
+      const courseName = this.subject + this.catalog + this.extension; // create course name
+      const body = {
+        instructor: this.instructorName,
+        instructorEmail: this.activeUser,
+        hours: this.hours,
+        enrolled: this.numStudent,
+        desc: this.desc.toUpperCase()
+      }
+
+      this.http.post(`/api/courses/${courseName.toUpperCase()}`, body, this.options).subscribe(() => {
+        alert(`Created course with name: ${courseName}`);
+      }, (err => {
+        alert(err.error);
+      })
+      )
+    }
   }
 
   ngOnInit(): void {
