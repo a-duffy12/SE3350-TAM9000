@@ -1,4 +1,4 @@
-# SE3350-TAM900
+# SE3350-TAM9000
 Agile / Scrum design project for SE3350. Web app built with Node, Express, and Angular to match TA candidates with courses
 
 to get it running, install the following libraries
