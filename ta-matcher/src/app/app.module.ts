@@ -8,14 +8,16 @@ import { LoginComponent } from './login/login.component';
 import { appRoutingModule } from './app.routing';
 import { Validator } from './validator.service';
 import { InstructorViewComponent } from './instructor-view/instructor-view.component'
-import { ApplicationComponent } from './application/application.component'
+import { ApplicationComponent } from './application/application.component';
+import { CourseSearchComponent } from './course-search/course-search.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     InstructorViewComponent,
-    ApplicationComponent
+    ApplicationComponent,
+    CourseSearchComponent
   ],
   imports: [
     BrowserModule,
