@@ -25,6 +25,7 @@ export class InstructorViewComponent implements OnInit {
   numStudent=0;
   desc=''; // make descriptions upper case before sending to back end
   instructorName='';
+  numQuestions = new Array();
 
   constructor(private http: HttpClient, private val: Validator)
   {
@@ -74,6 +75,14 @@ export class InstructorViewComponent implements OnInit {
       })
       )
     }
+  }
+
+  addQuestion(){
+    this.numQuestions.push(`Question ${this.numQuestions.length}`);
+  }
+
+  removeQuestion(){
+    this.numQuestions.pop();
   }
 
   ngOnInit(): void {
