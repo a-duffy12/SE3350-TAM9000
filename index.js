@@ -289,6 +289,31 @@ router.post("/application/:email", (req, res) => {
     }
 })
 
+// Delete all TA applications DELETE
+router.delete("/application/delete/:email", (req, res) => {
+    if (sanitizeInput(req.params.email, 100))
+        {
+            adata = getData(appsData);
+            const appIndex = adata.findIndex(a => a.email === req.params.email); 
+    
+            if (appIndex >= 0)
+            {               
+                adata = adata.filter(a => a.email != req.params.email); 
+                res.send(`Deleted schedule with name: ${req.params.email}`)               
+            }
+            else if (appIndex < 0) 
+            {
+                res.status(404).send(`No schedule found with name: ${req.params.email}`);
+            }
+    
+            setData(adata, appsFile); 
+        }
+        else
+        {
+            res.status(400).send("Invalid input!");
+        }
+})
+
 // get all courses
 router.get("/courses", (req, res) => {
     res.send(getData(courseData)); // get all courses data
