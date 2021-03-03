@@ -8,10 +8,13 @@
   Number of Students: <input placeholder="ex. 100" type="number" [(ngModel)]="numStudent"><br><br>
   Description: <input placeholder="" [(ngModel)]="desc"><br><br>
 
-  <app-create-question *ngFor="let question of numQuestions"></app-create-question>
+  <p *ngIf="data.numQuestions.length > 0">Create Yes/No questions only!</p>
+  <div *ngFor="let question of data.numQuestions">
+    <app-create-question [id]="question"></app-create-question>
+  </div>
   <div>
-    <button (click)="addQuestion()">Add Question</button>
-    <button (click)="removeQuestion()">Remove Question</button>
+    <button (click)="data.addQuestion()">Add Question</button>
+    <button (click)="data.removeQuestion()">Remove Question</button>
   </div>
   <button (click)="addCourse()">Create Course</button>
 
