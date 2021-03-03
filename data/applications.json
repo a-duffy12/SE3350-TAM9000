@@ -1,1 +1,71 @@
-[]
+[
+    {
+        "courseCode": "SE123",
+        "name": "Alice",
+        "email": "alice@uwo.ca",
+        "status": "1",
+        "hours": "5",
+        "courseRank": "1",
+        "questions": [
+            {
+                "question": "Know Java?",
+                "answer": "yes"
+            },
+            {
+                "question": "Know OOP?",
+                "answer": "no"
+            },
+            {
+                "question": "Teaching certificate?",
+                "answer": "no"
+            }
+        ],
+        "rank": null
+    },
+    {
+        "courseCode": "SE123",
+        "name": "Bob",
+        "email": "bob@uwo.ca",
+        "status": "2",
+        "hours": "10",
+        "courseRank": "1",
+        "questions": [
+            {
+                "question": "Know Java?",
+                "answer": "no"
+            },
+            {
+                "question": "Know OOP?",
+                "answer": "yes"
+            },
+            {
+                "question": "Teaching certificate?",
+                "answer": "yes"
+            }
+        ],
+        "rank": 1
+    },
+    {
+        "courseCode": "SE123",
+        "name": "Charles",
+        "email": "charles@uwo.ca",
+        "status": "3",
+        "hours": "10",
+        "courseRank": "2",
+        "questions": [
+            {
+                "question": "Know Java?",
+                "answer": "no"
+            },
+            {
+                "question": "Know OOP?",
+                "answer": "yes"
+            },
+            {
+                "question": "Teaching certificate?",
+                "answer": "yes"
+            }
+        ],
+        "rank": null
+    }
+]

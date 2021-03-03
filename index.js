@@ -196,6 +196,7 @@ router.route("/courses/:courseName")
                 newCourse.hours = req.body.hours; // set hours
                 newCourse.enrolled = req.body.enrolled; // set number of students enrolled
                 newCourse.desc = req.body.desc; // set description
+                newCourse.applicantRanks = [];
 
                 cdata.push(newCourse); // add the new course
                 res.send(`Created course: ${req.params.courseName}`); // send message
@@ -264,30 +265,47 @@ router.get("/courses/key/:keyword", (req, res) => {
 
 // submit TA application PUT
 router.post("/application/:email", (req, res) => {
-    if(sanitizeEmail(req.params.email)){
-        const email = req.params.email;
-        const answers = req.body;
-        const appsJSON = JSON.parse(JSON.stringify(appsData));
-        // TODO: check if the course exists before writing to the application JSON
-        const courseJSON = JSON.parse(JSON.stringify(courseData));
-        const courseExists = courseJSON.findIndex(c => c.courseName == answers.base[0]);
-        if(courseExists > 0){            
-            let TAapplication = {
-                email: email,
-                baseQuestions: answers.base
-            };
-            appsJSON.push(TAapplication);
-            res.send("Application submitted");
-            setData(appsJSON,appsFile);
-        }
-        else{
-            res.status(400).send("Course does not exist");
-        }
-    }
-    else{
-        res.status(400).send("Invalid Email");
-    }
+    if(!sanitizeEmail(req.params.email)) return res.status(404).send('Invalid Email'); // if the email does not exist
+
+    const email = req.params.email;
+    const answers = req.body.answer;
+    const appsJSON = JSON.parse(JSON.stringify(appsData));
+    // TODO: check if the course exists before writing to the application JSON
+    const courseJSON = JSON.parse(JSON.stringify(courseData));
+    const courseExists = courseJSON.findIndex(c => c.courseName == answers.base[0]);
+
+    if(!(courseExists > 0)) return res.status(400).send("Course does not exist"); // if the course does not exist
+
+    let TAapplication = {
+        email: email,
+        baseQuestions: answers.base
+    };
+
+    appsJSON.push(TAapplication);
+    res.send("Application submitted");
+    setData(appsJSON,appsFile);
+
 })
+
+// Rank applicants POST
+router.post("/rank", (req, res) => {
+
+    const appsJSON = JSON.parse(JSON.stringify(appsData));
+
+    const rank = req.body.rank;
+    const course = req.body.courseCode;
+    const email = req.body.email;
+    const applicant = appsJSON.find(e => e.email === email & e.courseCode === course);
+
+    // check if the rank is a number and if the course exists
+    if (!Number.isInteger(rank)) return res.status(404).send('Please enter a number for the rank');
+    if (!applicant) return res.status(404).send('Email and course combination does not exist');
+
+    applicant.rank = rank;
+
+    setData(appsJSON, appsFile);
+    res.send(applicant);
+});
 
 // get all courses
 router.get("/courses", (req, res) => {
