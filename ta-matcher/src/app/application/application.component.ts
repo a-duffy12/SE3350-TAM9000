@@ -17,10 +17,12 @@ export class ApplicationComponent implements OnInit {
   @Input() courseTAd: Boolean | undefined;
   @Input() prevExp: string | undefined;
 
+
   sub: Subscription;
   activeUser = "";
   isStudent: Boolean = false;
   studentEmail: string | undefined;
+  taEmail: string | undefined;
 
   constructor(private http: HttpClient, public validator: Validator) {
     this.sub = interval(100).subscribe(() => {
@@ -46,6 +48,7 @@ export class ApplicationComponent implements OnInit {
         this.isStudent = false;
       }
     });
+
   }
 
   ngOnInit(): void {
@@ -57,6 +60,12 @@ export class ApplicationComponent implements OnInit {
         alert("Application submitted");
       })
     }
+  }
+
+  deleteApplication(){
+    this.http.delete<any>(`/api/application/delete/${this.taEmail}`).subscribe((data:any) => {
+      //alert("Applications deleted");
+    })
   }
 
 }
