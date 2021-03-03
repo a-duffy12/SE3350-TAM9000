@@ -10,6 +10,7 @@ import { Validator } from './validator.service';
 import { InstructorViewComponent } from './instructor-view/instructor-view.component'
 import { ApplicationComponent } from './application/application.component';
 import { CreateQuestionComponent } from './create-question/create-question.component'
+import { CourseSearchComponent } from './course-search/course-search.component'
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { CreateQuestionComponent } from './create-question/create-question.compo
     LoginComponent,
     InstructorViewComponent,
     ApplicationComponent,
-    CreateQuestionComponent
+    CreateQuestionComponent,
+    CourseSearchComponent
   ],
   imports: [
     BrowserModule,

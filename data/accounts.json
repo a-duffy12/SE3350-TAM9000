@@ -38,5 +38,15 @@
         "hours": null,
         "isAssigned": null,
         "email": "12aduffy@gmail.com"
+    },
+    {
+        "password": "$2b$12$aIGKesfqVC1zFQPPNSJAweImVxYMRM8zh/20tF8/x7QgPM/49eb0e",
+        "fName": "Michael",
+        "lName": "Luong",
+        "idNo": 222222222,
+        "type": "instructor",
+        "hours": null,
+        "isAssigned": null,
+        "email": "michaeltriluong@gmail.com"
     }
 ]
