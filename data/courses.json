@@ -14,5 +14,21 @@
         "hours": 10,
         "enrolled": 150,
         "desc": "HELL ON EARTH"
+    },
+    {
+        "courseName": "SE3314A",
+        "instructor": "Michael Luong",
+        "instructorEmail": "michaeltriluong@gmail.com",
+        "hours": 15,
+        "enrolled": 140,
+        "desc": "ALSO HELL ON EARTH"
+    },
+    {
+        "courseName": "ECE3375B",
+        "instructor": "Michael Luong",
+        "instructorEmail": "michaeltriluong@gmail.com",
+        "hours": 20,
+        "enrolled": 125,
+        "desc": "WHY TAKE IF I IN SOFTWARE?"
     }
 ]
