@@ -3,15 +3,17 @@
         "courseName": "SE3350B",
         "instructor": "Aiden Duffy",
         "instructorEmail": "12aduffy@gmail.com",
-        "hours": 20,
+        "enrolledLast": 105,
         "enrolled": 100,
+        "hoursLast": 20,
+        "hours": 20,
         "desc": "SOFTWARE ENGINEERING DESIGN 3"
     },
     {
         "courseName": "SE3316A",
         "instructor": "Aiden Duffy",
         "instructorEmail": "12aduffy@gmail.com",
-        "hours": 10,
+        "enrolledLast": 140,
         "enrolled": 150,
         "desc": "HELL ON EARTH"
     },

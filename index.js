@@ -193,8 +193,10 @@ router.route("/courses/:courseName")
                 newCourse.courseName = req.params.courseName; // set course name
                 newCourse.instructor = req.body.instructor; // set instructor
                 newCourse.instructorEmail = req.body.instructorEmail; // set instructor email
-                newCourse.hours = req.body.hours; // set hours
+                newCourse.enrolledLast = req.body.enrolledLast; // set number of students enrolled last year
                 newCourse.enrolled = req.body.enrolled; // set number of students enrolled
+                newCourse.hoursLast = req.body.hours; // set number of hours from last year
+                newCourse.hours = Math.round(newCourse.hoursLast * (newCourse.enrolled / newCourse.enrolledLast)); // set number of house
                 newCourse.desc = req.body.desc; // set description
 
                 cdata.push(newCourse); // add the new course

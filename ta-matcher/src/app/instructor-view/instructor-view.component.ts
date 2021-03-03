@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Validator } from '../validator.service';
 import { Subscription, interval, Observable } from 'rxjs';
 
-
 @Component({
   selector: 'app-instructor-view',
   templateUrl: './instructor-view.component.html',
@@ -16,12 +15,12 @@ export class InstructorViewComponent implements OnInit {
 
   sub: Subscription;
   activeUser = '';
-  instruct = false;
   catalog = ''; // make upper case
   subject = ''; // make upper case
   extension = ''; // make upper case
   instructor=''; // get from active account
   hours=0;
+  numOldStudent=0;
   numStudent=0;
   desc=''; // make descriptions upper case before sending to back end
   instructorName='';
@@ -29,40 +28,32 @@ export class InstructorViewComponent implements OnInit {
   constructor(private http: HttpClient, private val: Validator)
   {
     // every second, update the active user variable
-    this.sub = interval(100).subscribe(() => {
+    this.sub = interval(1000).subscribe(() => {
       this.activeUser = this.val.getActiveUser();
 
       if (this.activeUser)
       {
         // check to see if this user is an instructor
         this.http.get(`/api/users/${this.activeUser}`).subscribe((data:any) => {
-          if (data.type === "instructor") // if user is an admin
+
+          if (data.type == "instructor")
           {
-            this.instruct = true; // reveal admin level content
             this.instructorName = data.fName + " " + data.lName; // build instructor name
           }
-          else // if user is not an admin
-          {
-            this.instruct = false; // hide admin level content
-          }
-        })
+        });
       }
-      else
-      {
-        this.instruct = false;
-      }
-      console.log(this.instruct);
     });
   }
 
   addCourse(): void {
-    if (this.instruct && this.subject && this.catalog && this.extension && this.hours && this.numStudent && this.desc && this.instructorName)
+    if (this.activeUser && this.subject && this.catalog && this.extension && this.hours && this.numOldStudent && this.numStudent && this.desc && this.instructorName)
     {
       const courseName = this.subject + this.catalog + this.extension; // create course name
       const body = {
         instructor: this.instructorName,
         instructorEmail: this.activeUser,
         hours: this.hours,
+        enrolledLast: this.numOldStudent,
         enrolled: this.numStudent,
         desc: this.desc.toUpperCase()
       }
@@ -73,6 +64,10 @@ export class InstructorViewComponent implements OnInit {
         alert(err.error);
       })
       )
+    }
+    else
+    {
+      alert("Invalid input!");
     }
   }
 

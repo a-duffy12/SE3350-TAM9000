@@ -1,11 +1,12 @@
-<div *ngIf = "instruct == true">
+<div *ngIf = "activeUser">
   <h2>Post a course</h2><br><br>
 
   Subject: <input placeholder="ex. SE" [(ngModel)]="subject"><br><br>
   Catalog: <input placeholder="ex. 3350" [(ngModel)]="catalog"><br><br>
   Extension: <input placeholder="ex. A,B" [(ngModel)]="extension"><br><br>
-  Hours: <input placeholder="ex. 30" type="number" [(ngModel)]="hours"><br><br>
-  Number of Students: <input placeholder="ex. 100" type="number" [(ngModel)]="numStudent"><br><br>
+  Hours Last Year: <input placeholder="ex. 30" type="number" [(ngModel)]="hours"><br><br>
+  Previous Enrollment: <input placeholder="ex. 100" type="number" [(ngModel)]="numOldStudent"><br><br>
+  Current Enrollment: <input placeholder="ex. 100" type="number" [(ngModel)]="numStudent"><br><br>
   Description: <input placeholder="" [(ngModel)]="desc"><br><br>
 
   <button (click)="addCourse()">Create Course</button>

@@ -1,0 +1,46 @@
+<h2>View all courses</h2><br><br>
+<button (click)="searchAll()">View All</button>
+<div *ngIf="cdata1">
+  <p>Displaying search results</p>
+  <ul class="list">
+    <li *ngFor="let c of cdata1" class="list-li">
+      <span>{{c.courseName}} - {{c.desc}}</span>
+      <span>Taught by: {{c.instructor}} ({{c.instructorEmail}})</span>
+      <span>Enrollment: {{c.enrolled}} student</span>
+      <span>TA hours available: {{c.hours}} hours</span>
+    </li>
+  </ul>
+</div>
+
+<h2>Search by course name</h2><br><br>
+Subject: <input placeholder="ex. SE" [(ngModel)]="subject"><br><br>
+Catalog: <input placeholder="ex. 3350" [(ngModel)]="catalog"><br><br>
+Extension: <input placeholder="ex. B" [(ngModel)]="extension"><br><br>
+<button (click)="searchName()">Search</button>
+<div *ngIf="cdata2">
+  <p>Displaying search results</p>
+  <ul class="list">
+    <li class="list-li">
+      <span>{{cdata2.courseName}} - {{cdata2.desc}}</span>
+      <span>Taught by: {{cdata2.instructor}} ({{cdata2.instructorEmail}})</span>
+      <span>Enrollment: {{cdata2.enrolled}} student</span>
+      <span>TA hours available: {{cdata2.hours}} hours</span>
+    </li>
+  </ul>
+</div>
+
+<h2>Search by course description</h2><br><br>
+Search Term: <input placeholder="Enter keyword(s)..." [(ngModel)]="key"><br><br>
+<button (click)="searchDesc()">Search</button><br><br>
+<div *ngIf="cdata3">
+  <p>Displaying search results</p>
+  <ul class="list">
+    <li *ngFor="let c of cdata3" class="list-li">
+      <span>{{c.courseName}} - {{c.desc}}</span>
+      <span>Taught by: {{c.instructor}} ({{c.instructorEmail}})</span>
+      <span>Enrollment: {{c.enrolled}} student</span>
+      <span>TA hours available: {{c.hours}} hours</span>
+    </li>
+  </ul>
+</div>
+
