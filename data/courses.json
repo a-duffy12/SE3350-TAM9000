@@ -32,5 +32,15 @@
         "hours": 20,
         "enrolled": 125,
         "desc": "WHY TAKE IF I IN SOFTWARE?"
+    },
+    {
+        "courseName": "SE3351B",
+        "instructor": "Aiden Duffy",
+        "instructorEmail": "12aduffy@gmail.com",
+        "enrolledLast": 20,
+        "enrolled": 30,
+        "hoursLast": 10,
+        "hours": 15,
+        "desc": "APPLES ARE COOL"
     }
 ]

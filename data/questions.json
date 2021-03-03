@@ -1,8 +1,15 @@
 [
-  {
-    "courseID": "2202A",
-    "courseQuestions": [
-      "Do you have experience with JavaScript"
-    ]
-  }
+    {
+        "courseID": "SE3351B",
+        "courseQuestions": [
+            {
+                "question": "Know about apples",
+                "preferredAnswer": true
+            },
+            {
+                "question": "apples are bad",
+                "preferredAnswer": false
+            }
+        ]
+    }
 ]

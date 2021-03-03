@@ -58,6 +58,7 @@ export class InstructorViewComponent implements OnInit {
         enrolled: this.numStudent,
         desc: this.desc.toUpperCase()
       }
+      const questions = this.data.questions;
 
       this.http.post(`/api/courses/${courseName.toUpperCase()}`, body, this.options).subscribe(() => {
         alert(`Created course with name: ${courseName}`);
@@ -65,6 +66,12 @@ export class InstructorViewComponent implements OnInit {
         alert(err.error);
       })
       )
+
+      this.http.post(`/api/questions/${courseName.toUpperCase()}`, questions, this.options).subscribe(() => {
+        console.log("Questions created");
+      }, (err => {
+        console.log(err.error);
+      }))
     }
     else
     {

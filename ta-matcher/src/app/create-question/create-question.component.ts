@@ -9,7 +9,7 @@ import { ShareDataService } from '../share-data.service';
 export class CreateQuestionComponent implements OnInit {
   @Input()
   id: any;
-
+  boolean = [{display: "Yes", value: true}, {display: "No", value: false}]
   constructor(public data: ShareDataService) { }
 
   ngOnInit(): void {

@@ -7,10 +7,12 @@ const bcrypt = require("bcrypt"); // get hashing module
 const userData = require("./data/accounts.json"); // json data for user accounts
 const appsData = require("./data/applications.json"); // json data for user applications
 const courseData = require("./data/courses.json"); // json data for courses
+const questionsData = require("./data/questions.json"); // json data for course questions
 
 const userFile = "./data/accounts.json"; // file holding json data for user accounts
 const appsFile = "./data/applications.json"; // file holding json data for applications
 const courseFile = "./data/courses.json"; // file holding json data for courses
+const questionsFile = "./data/questions.json"; // file holding json data for course questions
 
 const salt = 12;
 
@@ -270,7 +272,6 @@ router.post("/application/:email", (req, res) => {
         const email = req.params.email;
         const answers = req.body;
         const appsJSON = JSON.parse(JSON.stringify(appsData));
-        // TODO: check if the course exists before writing to the application JSON
         const courseJSON = JSON.parse(JSON.stringify(courseData));
         const courseExists = courseJSON.findIndex(c => c.courseName == answers.base[0]);
         if(courseExists > 0){            
@@ -321,6 +322,19 @@ router.get("/courses", (req, res) => {
     res.send(getData(courseData)); // get all courses data
 });
 
+//submit course questions
+router.post("/questions/:courseID",(req, res) => {
+    const courseName = req.params.courseID;
+    const questions = req.body;
+    const qJSON = getData(questionsData);
+    let obj = {
+        courseID: courseName,
+        courseQuestions: questions
+    }
+    qJSON.push(obj);
+    setData(qJSON,questionsFile);
+    res.send(qJSON);
+})
 
 // test hash value
 router.get("/test/:password", (req, res) => {
