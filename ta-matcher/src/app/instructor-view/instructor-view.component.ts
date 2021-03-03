@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Validator } from '../validator.service';
+import { ShareDataService } from '../share-data.service';
 import { Subscription, interval, Observable } from 'rxjs';
 
 
@@ -25,9 +26,8 @@ export class InstructorViewComponent implements OnInit {
   numStudent=0;
   desc=''; // make descriptions upper case before sending to back end
   instructorName='';
-  numQuestions = new Array();
 
-  constructor(private http: HttpClient, private val: Validator)
+  constructor(private http: HttpClient, private val: Validator, public data: ShareDataService)
   {
     // every second, update the active user variable
     this.sub = interval(100).subscribe(() => {
@@ -75,14 +75,6 @@ export class InstructorViewComponent implements OnInit {
       })
       )
     }
-  }
-
-  addQuestion(){
-    this.numQuestions.push(`Question ${this.numQuestions.length}`);
-  }
-
-  removeQuestion(){
-    this.numQuestions.pop();
   }
 
   ngOnInit(): void {

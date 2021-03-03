@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ShareDataService } from '../share-data.service';
 
 @Component({
   selector: 'app-create-question',
@@ -6,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./create-question.component.css']
 })
 export class CreateQuestionComponent implements OnInit {
+  @Input()
+  id: any;
 
-  constructor() { }
+  constructor(public data: ShareDataService) { }
 
   ngOnInit(): void {
   }
