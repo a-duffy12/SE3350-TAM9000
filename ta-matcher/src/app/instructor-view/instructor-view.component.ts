@@ -25,6 +25,9 @@ export class InstructorViewComponent implements OnInit {
   numStudent=0;
   desc=''; // make descriptions upper case before sending to back end
   instructorName='';
+  email = '';
+  courseCode = '';
+  rank = '';
 
   constructor(private http: HttpClient, private val: Validator)
   {
@@ -53,6 +56,21 @@ export class InstructorViewComponent implements OnInit {
       }
       console.log(this.instruct);
     });
+  }
+
+  rankApplicant(): void {
+    const body = {
+      rank: this.rank,
+      email: this.email,
+      courseCode: this.courseCode
+    }
+
+    this.http.post('/api/rank', body, this.options).subscribe(() => {
+      alert(`Applicant ${this.email} for ${this.courseCode} ranked ${this.rank}`);
+    }, (err => {
+      alert(err.error);
+    })
+    )
   }
 
   addCourse(): void {

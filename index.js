@@ -292,7 +292,7 @@ router.post("/rank", (req, res) => {
 
     const appsJSON = JSON.parse(JSON.stringify(appsData));
 
-    const rank = req.body.rank;
+    const rank = Number(req.body.rank);
     const course = req.body.courseCode;
     const email = req.body.email;
     const applicant = appsJSON.find(e => e.email === email & e.courseCode === course);
@@ -302,6 +302,7 @@ router.post("/rank", (req, res) => {
     if (!applicant) return res.status(404).send('Email and course combination does not exist');
 
     applicant.rank = rank;
+    // TODO: check if the course belongs to the instructor
 
     setData(appsJSON, appsFile);
     res.send(applicant);

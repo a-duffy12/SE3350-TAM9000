@@ -10,4 +10,12 @@
 
   <button (click)="addCourse()">Create Course</button>
 
+  <br><br><br><h2>Rank applicants</h2><br><br>
+
+  Applicant Email: <input placeholder="ex. bob@uwo.ca" [(ngModel)]="email"><br><br>
+  Course Code: <input placeholder="ex. SE3350" [(ngModel)]="courseCode"><br><br>
+  Applicant Rank: <input placeholder="ex. 2" [(ngModel)]="rank"><br><br>
+
+  <button (click)="rankApplicant()">Rank Applicant</button><br><br>
+
 </div>
