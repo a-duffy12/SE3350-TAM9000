@@ -616,6 +616,38 @@ function InstructorViewComponent_div_0_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function InstructorViewComponent_div_0_Template_button_click_40_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r5); const ctx_r14 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](); return ctx_r14.addCourse(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](41, "Create Course");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](31, "br");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](32, "br");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](33, "br");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](34, "h2");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](35, "Rank applicants");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](36, "br");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](37, "br");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](38, " Applicant Email: ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](39, "input", 8);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngModelChange", function InstructorViewComponent_div_0_Template_input_ngModelChange_39_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r2); const ctx_r9 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](); return ctx_r9.email = $event; });
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](40, "br");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](41, "br");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](42, " Course Code: ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](43, "input", 9);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngModelChange", function InstructorViewComponent_div_0_Template_input_ngModelChange_43_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r2); const ctx_r10 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](); return ctx_r10.courseCode = $event; });
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](44, "br");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](45, "br");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](46, " Applicant Rank: ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](47, "input", 10);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("ngModelChange", function InstructorViewComponent_div_0_Template_input_ngModelChange_47_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r2); const ctx_r11 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](); return ctx_r11.rank = $event; });
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](48, "br");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](49, "br");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](50, "button", 7);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function InstructorViewComponent_div_0_Template_button_click_50_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r2); const ctx_r12 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](); return ctx_r12.rankApplicant(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](51, "Rank Applicant");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](52, "br");
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](53, "br");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
 } if (rf & 2) {
     const ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"]();
@@ -655,6 +687,9 @@ class InstructorViewComponent {
         this.numStudent = 0;
         this.desc = ''; // make descriptions upper case before sending to back end
         this.instructorName = '';
+        this.email = '';
+        this.courseCode = '';
+        this.rank = '';
         // every second, update the active user variable
         this.sub = Object(rxjs__WEBPACK_IMPORTED_MODULE_0__["interval"])(1000).subscribe(() => {
             this.activeUser = this.val.getActiveUser();
@@ -667,6 +702,18 @@ class InstructorViewComponent {
                 });
             }
         });
+    }
+    rankApplicant() {
+        const body = {
+            rank: this.rank,
+            email: this.email,
+            courseCode: this.courseCode
+        };
+        this.http.post('/api/rank', body, this.options).subscribe(() => {
+            alert(`Applicant ${this.email} for ${this.courseCode} ranked ${this.rank}`);
+        }, (err => {
+            alert(err.error);
+        }));
     }
     addCourse() {
         if (this.activeUser && this.subject && this.catalog && this.extension && this.hours && this.numOldStudent && this.numStudent && this.desc && this.instructorName) {
