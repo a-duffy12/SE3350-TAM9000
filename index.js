@@ -357,7 +357,70 @@ router.get("/rank/:course/:user", (req, res) => {
                 if (cdata[ind].instructorEmail == req.params.user || udata[ind2].type == "admin") // creates a ranking
                 {
                     // algorithm
-                    res.send(`Hello`);
+                    let apps = [];
+                    let ones = [];
+                    let twos = [];
+                    let threes = [];
+                    let ranks = [];
+
+                    const adata = getData(appsData); // get application data
+
+                    for (let a in adata) // get all relevant applicants
+                    {
+                        if (adata[a].courseCode == req.params.course)
+                        {
+                            apps.push(adata[a]);
+                        }
+                    }
+
+                    // check status
+                    for (let a in apps)
+                    {
+                        if (apps[a].status == 1)
+                        {
+                            ones.push(apps[a]);
+                        }
+                        else if (apps[a].status == 2)
+                        {
+                            twos.push(apps[a]);
+                        }
+                        else if (apps[a].status == 3)
+                        {
+                            threes.push(apps[a]);
+                        }
+                    }
+
+                    // use student's preferences
+                    ones = ones.sort((a, b) => a.courseRank - b.courseRank);
+                    twos = twos.sort((a, b) => a.courseRank - b.courseRank);
+                    threes = threes.sort((a, b) => a.courseRank - b.courseRank);
+                    
+                    for (let o in ones)
+                    {
+                        ranks.push(ones[o]);
+                    }
+
+                    for (let t in twos)
+                    {
+                        ranks.push(twos[t]);
+                    }
+
+                    for (let t in threes)
+                    {
+                        ranks.push(threes[t]);
+                    }
+
+                    for (let r in ranks)
+                    {
+                        ranks[r].rank = Number(r)+1; // apply rank
+
+                        let ind3 = adata.findIndex(u => u.email == ranks[r].email && u.courseCode == ranks[r].courseCode);
+                        adata[ind3].rank = Number(r)+1; // set rank in application file
+                    }
+
+                    setData(adata, appsFile); // set application data
+
+                    res.send(ranks); // send rank
                 }
                 else // not allowed to get a ranking
                 {

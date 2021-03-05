@@ -1,11 +1,11 @@
 [
     {
-        "courseCode": "SE3314B",
+        "courseCode": "ECE3375B",
         "name": "Alice",
         "email": "alice@uwo.ca",
-        "status": "1",
-        "hours": "5",
-        "courseRank": "1",
+        "status": 1,
+        "hours": 5,
+        "courseRank": 1,
         "questions": [
             {
                 "question": "Do you know the fundamentals of networking",
@@ -20,15 +20,15 @@
                 "answer": false
             }
         ],
-        "rank": null
+        "rank": 1
     },
     {
-        "courseCode": "SE3314B",
+        "courseCode": "ECE3375B",
         "name": "Bob",
         "email": "bob@uwo.ca",
-        "status": "2",
-        "hours": "10",
-        "courseRank": "1",
+        "status": 2,
+        "hours": 10,
+        "courseRank": 1,
         "questions": [
             {
                 "question": "Do you know the fundamentals of networking",
@@ -41,31 +41,31 @@
             {
                 "question": "Are you a registered sex offender",
                 "answer": false
+            }
+        ],
+        "rank": 3
+    },
+    {
+        "courseCode": "ECE3375B",
+        "name": "Charles",
+        "email": "charles@uwo.ca",
+        "status": 1,
+        "hours": 10,
+        "courseRank": 2,
+        "questions": [
+            {
+                "question": "Do you know the fundamentals of networking",
+                "answer": false
+            },
+            {
+                "question": "Do you know english",
+                "answer": false
+            },
+            {
+                "question": "Are you a registered sex offender",
+                "answer": true
             }
         ],
         "rank": 2
-    },
-    {
-        "courseCode": "SE3314B",
-        "name": "Charles",
-        "email": "charles@uwo.ca",
-        "status": "3",
-        "hours": "10",
-        "courseRank": "2",
-        "questions": [
-            {
-                "question": "Do you know the fundamentals of networking",
-                "answer": false
-            },
-            {
-                "question": "Do you know english",
-                "answer": false
-            },
-            {
-                "question": "Are you a registered sex offender",
-                "answer": true
-            }
-        ],
-        "rank": null
     }
 ]
