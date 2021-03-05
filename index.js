@@ -337,6 +337,45 @@ router.post("/rank", (req, res) => {
     res.send(applicant);
 });
 
+// get rankings via algorithm
+router.get("/rank/:course/:user", (req, res) => {
+
+    if (sanitizeInput(req.params.course) && sanitizeEmail(req.params.user))
+    {
+        cdata = getData(courseData); // get course data
+
+        const ind = cdata.findIndex(c => c.courseName === req.params.course); // find index of the the course if it exists
+
+        if (ind >= 0) // if the course already exists
+        {
+            udata = getData(userData); // get user data
+
+            const ind2 = udata.findIndex(u => u.email === req.params.user); // find index of the user if it exists
+
+            if (ind2 >= 0) // account exists
+            {
+                if (cdata[ind].instructorEmail == req.params.user || udata[ind2].type == "admin") // creates a ranking
+                {
+                    // algorithm
+                    res.send(`Hello`);
+                }
+                else // not allowed to get a ranking
+                {
+                    res.status(400).send(`The user: ${req.params.user} is not authorized to view this ranking!`);
+                }
+            }
+            else if (ind2 < 0) // account does not exists
+            {
+                res.status(404).send(`The user: ${req.params.user} does not exist!`); 
+            }
+        }
+        else if (ind < 0) // if the course does not exist
+        {
+            res.status(404).send(`The course: ${req.params.course} does not exist!`); 
+        }
+    }
+})
+
 // get all courses
 router.get("/courses", (req, res) => {
     res.send(getData(courseData)); // get all courses data

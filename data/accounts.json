@@ -24,7 +24,7 @@
         "fName": "Aiden",
         "lName": "Duffy",
         "idNo": 251008412,
-        "type": "student",
+        "type": "admin",
         "hours": 0,
         "isAssigned": false,
         "email": "aduffy22@uwo.ca"
