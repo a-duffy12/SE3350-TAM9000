@@ -15,5 +15,6 @@ export class ShareDataService {
 
   removeQuestion(){
     this.numQuestions.pop();
+    this.questions.pop();
   }
 }
