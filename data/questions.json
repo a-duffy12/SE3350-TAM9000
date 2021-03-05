@@ -11,5 +11,22 @@
                 "preferredAnswer": false
             }
         ]
+    },
+    {
+        "courseID": "SE3314B",
+        "courseQuestions": [
+            {
+                "question": "Do you know the fundamentals of networking",
+                "preferredAnswer": true
+            },
+            {
+                "question": "Do you know english",
+                "preferredAnswer": true
+            },
+            {
+                "question": "Are you a registered sex offender",
+                "preferredAnswer": false
+            }
+        ]
     }
 ]
