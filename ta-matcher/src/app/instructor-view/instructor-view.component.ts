@@ -29,6 +29,10 @@ export class InstructorViewComponent implements OnInit {
   courseCode = '';
   rank = '';
 
+  courseCatalog = '';
+  courseCodeAuto = '';
+  courseExt = '';
+
   constructor(private http: HttpClient, private val: Validator, public data: ShareDataService)
   {
     // every second, update the active user variable
@@ -62,6 +66,10 @@ export class InstructorViewComponent implements OnInit {
       alert(err.error);
     })
     )
+  }
+
+  autoRankApplicants(): void {
+
   }
 
   addCourse(): void {
