@@ -69,7 +69,11 @@ export class InstructorViewComponent implements OnInit {
   }
 
   autoRankApplicants(): void {
-
+    this.http.get(`/api/rank/${this.courseCatalog + this.courseCodeAuto + this.courseExt}/${this.activeUser}`).subscribe(() => {
+      alert(`Applicants for ${this.courseCatalog + this.courseCodeAuto + this.courseExt} ranked`);
+    }, (err => {
+      alert(err.error);
+    }));
   }
 
   addCourse(): void {

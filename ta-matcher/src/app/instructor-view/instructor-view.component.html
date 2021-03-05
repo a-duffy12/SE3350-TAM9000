@@ -25,7 +25,15 @@
   Course Code: <input placeholder="ex. SE3350" [(ngModel)]="courseCode"><br><br>
   Applicant Rank: <input placeholder="ex. 2" [(ngModel)]="rank"><br><br>
 
-  <button (click)="rankApplicant()">Rank Applicant</button><br><br>
+  <button (click)="rankApplicant()">Rank Applicant</button>
+
+  <br><br><br><h2>Automatically rank applicants</h2><br><br>
+
+  Course Catalog: <input placeholder="ex. SE" [(ngModel)]="courseCatalog"><br><br>
+  Course Code: <input placeholder="ex. 3350" [(ngModel)]="courseCodeAuto"><br><br>
+  Course Extension: <input placeholder="ex. B" [(ngModel)]="courseExt"><br><br>
+
+  <button (click)="autoRankApplicants()">Automatically Rank Applicants</button><br><br>
 
   Course Catalog: <input placeholder="ex. SE" [(ngModel)]="courseCatalog"><br><br>
   Course Code: <input placeholder="ex. 3350" [(ngModel)]="courseCodeAuto"><br><br>

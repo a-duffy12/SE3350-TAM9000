@@ -535,7 +535,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 function InstructorViewComponent_div_0_p_33_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "p");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](1, "Create Yes/No questions only!");
