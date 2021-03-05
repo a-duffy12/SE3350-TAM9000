@@ -1,9 +1,32 @@
 [
-  {
-    "courseID": "2202A",
-    "courseQuestions": [
-      "List any scripting languages you are proficient in",
-      "How many years of JavaScript experience?"
-    ]
-  }
+    {
+        "courseID": "SE3351B",
+        "courseQuestions": [
+            {
+                "question": "Know about apples",
+                "preferredAnswer": true
+            },
+            {
+                "question": "apples are bad",
+                "preferredAnswer": false
+            }
+        ]
+    },
+    {
+        "courseID": "SE3314B",
+        "courseQuestions": [
+            {
+                "question": "Do you know the fundamentals of networking",
+                "preferredAnswer": true
+            },
+            {
+                "question": "Do you know english",
+                "preferredAnswer": true
+            },
+            {
+                "question": "Are you a registered sex offender",
+                "preferredAnswer": false
+            }
+        ]
+    }
 ]

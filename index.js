@@ -7,10 +7,12 @@ const bcrypt = require("bcrypt"); // get hashing module
 const userData = require("./data/accounts.json"); // json data for user accounts
 const appsData = require("./data/applications.json"); // json data for user applications
 const courseData = require("./data/courses.json"); // json data for courses
+const questionsData = require("./data/questions.json"); // json data for course questions
 
 const userFile = "./data/accounts.json"; // file holding json data for user accounts
 const appsFile = "./data/applications.json"; // file holding json data for applications
 const courseFile = "./data/courses.json"; // file holding json data for courses
+const questionsFile = "./data/questions.json"; // file holding json data for course questions
 
 const salt = 12;
 
@@ -193,8 +195,10 @@ router.route("/courses/:courseName")
                 newCourse.courseName = req.params.courseName; // set course name
                 newCourse.instructor = req.body.instructor; // set instructor
                 newCourse.instructorEmail = req.body.instructorEmail; // set instructor email
-                newCourse.hours = req.body.hours; // set hours
+                newCourse.enrolledLast = req.body.enrolledLast; // set number of students enrolled last year
                 newCourse.enrolled = req.body.enrolled; // set number of students enrolled
+                newCourse.hoursLast = req.body.hours; // set number of hours from last year
+                newCourse.hours = Math.round(newCourse.hoursLast * (newCourse.enrolled / newCourse.enrolledLast)); // set number of house
                 newCourse.desc = req.body.desc; // set description
                 newCourse.applicantRanks = [];
 
@@ -287,6 +291,31 @@ router.post("/application/:email", (req, res) => {
 
 })
 
+// Delete all TA applications DELETE
+router.delete("/application/delete/:email", (req, res) => {
+    if (sanitizeInput(req.params.email, 100))
+        {
+            adata = getData(appsData);
+            const appIndex = adata.findIndex(a => a.email === req.params.email); 
+    
+            if (appIndex >= 0)
+            {               
+                adata = adata.filter(a => a.email != req.params.email); 
+                res.send(`Deleted schedule with name: ${req.params.email}`)               
+            }
+            else if (appIndex < 0) 
+            {
+                res.status(404).send(`No schedule found with name: ${req.params.email}`);
+            }
+    
+            setData(adata, appsFile); 
+        }
+        else
+        {
+            res.status(400).send("Invalid input!");
+        }
+})
+    
 // Rank applicants POST
 router.post("/rank", (req, res) => {
 
@@ -308,11 +337,126 @@ router.post("/rank", (req, res) => {
     res.send(applicant);
 });
 
+// get rankings via algorithm
+router.get("/rank/:course/:user", (req, res) => {
+
+    if (sanitizeInput(req.params.course) && sanitizeEmail(req.params.user))
+    {
+        cdata = getData(courseData); // get course data
+
+        const ind = cdata.findIndex(c => c.courseName === req.params.course); // find index of the the course if it exists
+
+        if (ind >= 0) // if the course already exists
+        {
+            udata = getData(userData); // get user data
+
+            const ind2 = udata.findIndex(u => u.email === req.params.user); // find index of the user if it exists
+
+            if (ind2 >= 0) // account exists
+            {
+                if (cdata[ind].instructorEmail == req.params.user || udata[ind2].type == "admin") // creates a ranking
+                {
+                    // algorithm
+                    let apps = [];
+                    let ones = [];
+                    let twos = [];
+                    let threes = [];
+                    let ranks = [];
+
+                    const adata = getData(appsData); // get application data
+
+                    for (let a in adata) // get all relevant applicants
+                    {
+                        if (adata[a].courseCode == req.params.course)
+                        {
+                            apps.push(adata[a]);
+                        }
+                    }
+
+                    // check status
+                    for (let a in apps)
+                    {
+                        if (apps[a].status == 1)
+                        {
+                            ones.push(apps[a]);
+                        }
+                        else if (apps[a].status == 2)
+                        {
+                            twos.push(apps[a]);
+                        }
+                        else if (apps[a].status == 3)
+                        {
+                            threes.push(apps[a]);
+                        }
+                    }
+
+                    // use student's preferences
+                    ones = ones.sort((a, b) => a.courseRank - b.courseRank);
+                    twos = twos.sort((a, b) => a.courseRank - b.courseRank);
+                    threes = threes.sort((a, b) => a.courseRank - b.courseRank);
+                    
+                    for (let o in ones)
+                    {
+                        ranks.push(ones[o]);
+                    }
+
+                    for (let t in twos)
+                    {
+                        ranks.push(twos[t]);
+                    }
+
+                    for (let t in threes)
+                    {
+                        ranks.push(threes[t]);
+                    }
+
+                    for (let r in ranks)
+                    {
+                        ranks[r].rank = Number(r)+1; // apply rank
+
+                        let ind3 = adata.findIndex(u => u.email == ranks[r].email && u.courseCode == ranks[r].courseCode);
+                        adata[ind3].rank = Number(r)+1; // set rank in application file
+                    }
+
+                    setData(adata, appsFile); // set application data
+
+                    res.send(ranks); // send rank
+                }
+                else // not allowed to get a ranking
+                {
+                    res.status(400).send(`The user: ${req.params.user} is not authorized to view this ranking!`);
+                }
+            }
+            else if (ind2 < 0) // account does not exists
+            {
+                res.status(404).send(`The user: ${req.params.user} does not exist!`); 
+            }
+        }
+        else if (ind < 0) // if the course does not exist
+        {
+            res.status(404).send(`The course: ${req.params.course} does not exist!`); 
+        }
+    }
+})
+
 // get all courses
 router.get("/courses", (req, res) => {
     res.send(getData(courseData)); // get all courses data
 });
 
+//submit course questions
+router.post("/questions/:courseID",(req, res) => {
+    const courseName = req.params.courseID;
+    const questions = req.body;
+    const qJSON = getData(questionsData);
+    let obj = {
+        courseID: courseName,
+        courseQuestions: questions
+    }
+    qJSON.push(obj);
+    setData(qJSON,questionsFile);
+    res.send(qJSON);
+})
 
 // test hash value
 router.get("/test/:password", (req, res) => {

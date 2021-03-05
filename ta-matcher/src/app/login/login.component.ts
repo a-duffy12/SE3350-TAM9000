@@ -19,9 +19,12 @@ export class LoginComponent implements OnInit {
 
   email = '';
   password = '';
+  emailNew = '';
+  passwordNew = '';
   passwordCheck = '';
   oldPassword = '';
   oldPasswordCheck = '';
+  passwordChange = '';
   fName = '';
   lName = '';
   type = '';
@@ -72,7 +75,7 @@ export class LoginComponent implements OnInit {
 
   newUser(): void {
 
-    if (this.email && this.password && this.passwordCheck && this.fName && this.lName && this.id && this.type && this.val.validateNum(this.id, 0, 999999999) && this.password == this.passwordCheck && (this.type == "student" || this.type == "instructor") && String(this.id).length == 9)
+    if (this.emailNew && this.passwordNew && this.passwordCheck && this.fName && this.lName && this.id && this.type && this.val.validateNum(this.id, 0, 999999999) && this.password == this.passwordCheck && (this.type == "student" || this.type == "instructor") && String(this.id).length == 9)
     {
 
       if (this.type == "student")
@@ -87,7 +90,7 @@ export class LoginComponent implements OnInit {
       }
 
       const body = {
-        password: this.password,
+        password: this.passwordNew,
         fName: this.fName,
         lName: this.lName,
         idNo: this.id,
@@ -96,7 +99,7 @@ export class LoginComponent implements OnInit {
         isAssigned: this.ass
       }
 
-      this.http.post(`/api/users/${this.email}`, body, this.options).subscribe(() => {
+      this.http.post(`/api/users/${this.emailNew}`, body, this.options).subscribe(() => {
         alert('User account created successfully, please log in')
       }, (err => {
         alert(err.error);
@@ -109,11 +112,11 @@ export class LoginComponent implements OnInit {
 
   changePassword(): void {
 
-    if (this.password && this.passwordCheck && this.oldPassword && this.oldPasswordCheck && this.password == this.passwordCheck && this.oldPassword == this.oldPasswordCheck && this.password != this.oldPassword)
+    if (this.passwordChange && this.passwordCheck && this.oldPassword && this.oldPasswordCheck && this.passwordChange == this.passwordCheck && this.oldPassword == this.oldPasswordCheck && this.passwordChange != this.oldPassword)
     {
       const body = {
         old_password: this.oldPassword,
-        password: this.password
+        password: this.passwordChange
       }
 
       this.http.put(`/api/users/${this.val.getActiveUser()}`, body, this.options).subscribe(() => {

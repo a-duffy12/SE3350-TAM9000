@@ -9,8 +9,8 @@
 
   <h2>Create an account</h2>
 
-  Email: <input placeholder="enter email..." [(ngModel)]="email"><br><br>
-  Password: <input placeholder="enter password..." type="password" [(ngModel)]="password"><br><br>
+  Email: <input placeholder="enter email..." [(ngModel)]="emailNew"><br><br>
+  Password: <input placeholder="enter password..." type="password" [(ngModel)]="passwordNew"><br><br>
   Confirm Password: <input placeholder="enter password again..." type="password" [(ngModel)]="passwordCheck"><br><br>
   First Name: <input placeholder="enter first name..." [(ngModel)]="fName"><br><br>
   Last Name: <input placeholder="enter last name..." [(ngModel)]="lName"><br><br>
@@ -28,7 +28,7 @@
 
   Existing Password: <input placeholder="enter existing password..." type="password" [(ngModel)]="oldPassword"><br><br>
   Confirm Existing Password: <input placeholder="enter existing password again..." type="password" [(ngModel)]="oldPasswordCheck"><br><br>
-  New Password: <input placeholder="enter new password..." type="password" [(ngModel)]="password"><br><br>
+  New Password: <input placeholder="enter new password..." type="password" [(ngModel)]="passwordChange"><br><br>
   Confirm New Password: <input placeholder="enter new password again..." type="password" [(ngModel)]="passwordCheck"><br><br>
 
   <button (click)="changePassword()">Update Password</button>

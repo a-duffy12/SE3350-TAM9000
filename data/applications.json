@@ -1,71 +1,71 @@
 [
     {
-        "courseCode": "SE123",
+        "courseCode": "ECE3375B",
         "name": "Alice",
         "email": "alice@uwo.ca",
-        "status": "1",
-        "hours": "5",
-        "courseRank": "1",
+        "status": 1,
+        "hours": 5,
+        "courseRank": 1,
         "questions": [
             {
-                "question": "Know Java?",
-                "answer": "yes"
+                "question": "Do you know the fundamentals of networking",
+                "answer": true
             },
             {
-                "question": "Know OOP?",
-                "answer": "no"
+                "question": "Do you know english",
+                "answer": false
             },
             {
-                "question": "Teaching certificate?",
-                "answer": "no"
+                "question": "Are you a registered sex offender",
+                "answer": false
             }
         ],
-        "rank": null
+        "rank": 1
     },
     {
-        "courseCode": "SE123",
+        "courseCode": "ECE3375B",
         "name": "Bob",
         "email": "bob@uwo.ca",
-        "status": "2",
-        "hours": "10",
-        "courseRank": "1",
+        "status": 2,
+        "hours": 10,
+        "courseRank": 1,
         "questions": [
             {
-                "question": "Know Java?",
-                "answer": "no"
+                "question": "Do you know the fundamentals of networking",
+                "answer": true
             },
             {
-                "question": "Know OOP?",
-                "answer": "yes"
+                "question": "Do you know english",
+                "answer": true
             },
             {
-                "question": "Teaching certificate?",
-                "answer": "yes"
+                "question": "Are you a registered sex offender",
+                "answer": false
+            }
+        ],
+        "rank": 3
+    },
+    {
+        "courseCode": "ECE3375B",
+        "name": "Charles",
+        "email": "charles@uwo.ca",
+        "status": 1,
+        "hours": 10,
+        "courseRank": 2,
+        "questions": [
+            {
+                "question": "Do you know the fundamentals of networking",
+                "answer": false
+            },
+            {
+                "question": "Do you know english",
+                "answer": false
+            },
+            {
+                "question": "Are you a registered sex offender",
+                "answer": true
             }
         ],
         "rank": 2
-    },
-    {
-        "courseCode": "SE123",
-        "name": "Charles",
-        "email": "charles@uwo.ca",
-        "status": "3",
-        "hours": "10",
-        "courseRank": "2",
-        "questions": [
-            {
-                "question": "Know Java?",
-                "answer": "no"
-            },
-            {
-                "question": "Know OOP?",
-                "answer": "yes"
-            },
-            {
-                "question": "Teaching certificate?",
-                "answer": "yes"
-            }
-        ],
-        "rank": null
     }
 ]

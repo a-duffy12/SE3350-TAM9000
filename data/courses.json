@@ -3,16 +3,44 @@
         "courseName": "SE3350B",
         "instructor": "Aiden Duffy",
         "instructorEmail": "12aduffy@gmail.com",
-        "hours": 20,
+        "enrolledLast": 105,
         "enrolled": 100,
+        "hoursLast": 20,
+        "hours": 20,
         "desc": "SOFTWARE ENGINEERING DESIGN 3"
     },
     {
         "courseName": "SE3316A",
         "instructor": "Aiden Duffy",
         "instructorEmail": "12aduffy@gmail.com",
-        "hours": 10,
+        "enrolledLast": 140,
         "enrolled": 150,
         "desc": "HELL ON EARTH"
+    },
+    {
+        "courseName": "SE3314A",
+        "instructor": "Michael Luong",
+        "instructorEmail": "michaeltriluong@gmail.com",
+        "hours": 15,
+        "enrolled": 140,
+        "desc": "ALSO HELL ON EARTH"
+    },
+    {
+        "courseName": "ECE3375B",
+        "instructor": "Michael Luong",
+        "instructorEmail": "michaeltriluong@gmail.com",
+        "hours": 20,
+        "enrolled": 125,
+        "desc": "WHY TAKE IF I IN SOFTWARE?"
+    },
+    {
+        "courseName": "SE3351B",
+        "instructor": "Aiden Duffy",
+        "instructorEmail": "12aduffy@gmail.com",
+        "enrolledLast": 20,
+        "enrolled": 30,
+        "hoursLast": 10,
+        "hours": 15,
+        "desc": "APPLES ARE COOL"
     }
 ]
