@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\chris\github\SE3350-TAM900\ta-matcher\src\main.ts */"zUnb");
+module.exports = __webpack_require__(/*! C:\Users\Aiden\git\SE3350-TAM900\ta-matcher\src\main.ts */"zUnb");
 
 
 /***/ }),
@@ -748,7 +748,7 @@ class InstructorViewComponent {
             email: this.email,
             courseCode: this.courseCode
         };
-        this.http.post('/api/rank', body, this.options).subscribe(() => {
+        this.http.post(`/api/rank/${this.activeUser}`, body, this.options).subscribe(() => {
             alert(`Applicant ${this.email} for ${this.courseCode} ranked ${this.rank}`);
         }, (err => {
             alert(err.error);
@@ -1259,6 +1259,7 @@ class ShareDataService {
     }
     removeQuestion() {
         this.numQuestions.pop();
+        this.questions.pop();
     }
 }
 ShareDataService.ɵfac = function ShareDataService_Factory(t) { return new (t || ShareDataService)(); };

@@ -317,12 +317,12 @@ router.delete("/application/delete/:email", (req, res) => {
 })
     
 // Rank applicants POST
-router.post("/rank", (req, res) => {
+router.post("/rank/:user", (req, res) => {
 
     const appsJSON = JSON.parse(JSON.stringify(appsData));
 
     const rank = Number(req.body.rank);
-    const course = req.body.courseCode;
+    const course = req.body.courseCode.toUpperCase();
     const email = req.body.email;
     const applicant = appsJSON.find(e => e.email === email & e.courseCode === course);
 
@@ -330,11 +330,39 @@ router.post("/rank", (req, res) => {
     if (!Number.isInteger(rank)) return res.status(404).send('Please enter a number for the rank');
     if (!applicant) return res.status(404).send('Email and course combination does not exist');
 
-    applicant.rank = rank;
-    // TODO: check if the course belongs to the instructor
+    cdata = getData(courseData); // get course data
 
-    setData(appsJSON, appsFile);
-    res.send(applicant);
+    const ind = cdata.findIndex(c => c.courseName === course); // find index of the the course if it exists
+
+    if (ind >= 0) // if the course already exists
+    {
+        udata = getData(userData); // get user data
+
+        const ind2 = udata.findIndex(u => u.email === req.params.user); // find index of the user if it exists
+
+        if (ind2 >= 0) // account exists
+        {
+            if (cdata[ind].instructorEmail == req.params.user || udata[ind2].type == "admin") 
+            {
+                applicant.rank = rank;
+
+                setData(appsJSON, appsFile);
+                res.send(`Successfully updated ranking for applicant: ${email} for ${course}`);
+            }
+            else // not allowed to get a ranking
+            {
+                res.status(400).send(`The user: ${req.params.user} is not authorized to edit this ranking!`);
+            }
+        }
+        else if (ind2 < 0) // account does not exists
+        {
+            res.status(404).send(`The user: ${req.params.user} does not exist!`); 
+        }
+    }
+    else if (ind < 0) // if the course does not exist
+    {
+        res.status(404).send(`The course: ${course} does not exist!`); 
+    }
 });
 
 // get rankings via algorithm

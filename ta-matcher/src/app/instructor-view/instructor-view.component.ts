@@ -60,7 +60,7 @@ export class InstructorViewComponent implements OnInit {
       courseCode: this.courseCode
     }
 
-    this.http.post('/api/rank', body, this.options).subscribe(() => {
+    this.http.post(`/api/rank/${this.activeUser}`, body, this.options).subscribe(() => {
       alert(`Applicant ${this.email} for ${this.courseCode} ranked ${this.rank}`);
     }, (err => {
       alert(err.error);
