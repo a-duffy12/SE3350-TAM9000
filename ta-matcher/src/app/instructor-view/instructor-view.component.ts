@@ -28,6 +28,7 @@ export class InstructorViewComponent implements OnInit {
   email = '';
   courseCode = '';
   rank = '';
+  rdata: any;
 
   courseCatalog = '';
   courseCodeAuto = '';
@@ -69,7 +70,9 @@ export class InstructorViewComponent implements OnInit {
   }
 
   autoRankApplicants(): void {
-    this.http.get(`/api/rank/${this.courseCatalog + this.courseCodeAuto + this.courseExt}/${this.activeUser}`).subscribe(() => {
+    this.rdata = undefined;
+    this.http.get(`/api/rank/${this.courseCatalog.toUpperCase() + this.courseCodeAuto + this.courseExt.toUpperCase()}/${this.activeUser}`).subscribe((data:any) => {
+      this.rdata = data;
       alert(`Applicants for ${this.courseCatalog + this.courseCodeAuto + this.courseExt} ranked`);
     }, (err => {
       alert(err.error);

@@ -40,5 +40,14 @@
   Course Extension: <input placeholder="ex. B" [(ngModel)]="courseExt"><br><br>
 
   <button (click)="autoRankApplicants()">Automatically Rank Applicants</button><br><br>
-
+  <div *ngIf="rdata">
+    <p>Displaying search results for {{rdata[0].courseCode}}</p>
+    <ul class="list">
+      <li *ngFor="let r of rdata" class="list-li">
+        <span>{{r.rank}}: {{r.name}} ({{r.email}})</span>
+        <span>Status: {{r.status}}</span>
+        <span>Hours: {{r.hours}} student</span>
+      </li>
+    </ul>
+  </div>
 </div>
