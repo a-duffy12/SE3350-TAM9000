@@ -22,6 +22,7 @@ export class InstructorViewComponent implements OnInit {
   hours=0;
   numOldStudent=0;
   numStudent=0;
+  newHours=0;
   desc=''; // make descriptions upper case before sending to back end
   inName='';
   inEmail='';
@@ -29,6 +30,8 @@ export class InstructorViewComponent implements OnInit {
   courseCode = '';
   rank = '';
   rdata: any;
+  requireTA: boolean = false;
+  labelPosition: 'before' | 'after' = 'before';
 
   courseCatalog = '';
   courseCodeAuto = '';
@@ -125,7 +128,8 @@ export class InstructorViewComponent implements OnInit {
         hours: this.hours,
         enrolledLast: this.numOldStudent,
         enrolled: this.numStudent,
-        desc: this.desc.toUpperCase()
+        desc: this.desc.toUpperCase(),
+        reqTA: this.requireTA
       }
 
       this.http.post(`/api/courses/${courseName.toUpperCase()}`, body, this.options).subscribe(() => {
@@ -158,6 +162,32 @@ export class InstructorViewComponent implements OnInit {
     {
       alert("Invalid input!");
     }
+  }
+
+  // function to override current allocated hours for a course
+  override()
+  {
+    if (this.activeUser && this.admn && this.subjectq && this.catalogq && this.newHours)
+    {
+      const courseName = this.subject + this.catalog + this.extension; // create course name
+      const body = {
+        instructor: this.inName,
+        instructorEmail: this.inEmail,
+        hours: this.newHours,
+        enrolledLast: this.numOldStudent,
+        enrolled: this.numStudent,
+        desc: this.desc.toUpperCase()
+      }
+      this.http.put(`/api/courses/${courseName.toUpperCase()}`,body, this.options).subscribe(()=>{
+        alert(`Current allocated TA hours for : ${courseName.toUpperCase()}`+' have been overrided!')
+      }, (err=> {
+        alert(err.error);
+      }))
+    }
+    else{
+      alert("Invalid input!");
+    }
+
   }
 
   ngOnInit(): void {
