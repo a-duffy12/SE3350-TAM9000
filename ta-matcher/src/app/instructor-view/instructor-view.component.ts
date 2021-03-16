@@ -165,9 +165,9 @@ export class InstructorViewComponent implements OnInit {
   }
 
   // function to override current allocated hours for a course
-  override()
+  Override()
   {
-    if (this.activeUser && this.admn && this.subjectq && this.catalogq && this.newHours)
+    if (this.activeUser && this.admn && this.subject && this.catalog && this.newHours && this.extension)
     {
       const courseName = this.subject + this.catalog + this.extension; // create course name
       const body = {
@@ -178,8 +178,9 @@ export class InstructorViewComponent implements OnInit {
         enrolled: this.numStudent,
         desc: this.desc.toUpperCase()
       }
+
       this.http.put(`/api/courses/${courseName.toUpperCase()}`,body, this.options).subscribe(()=>{
-        alert(`Current allocated TA hours for : ${courseName.toUpperCase()}`+' have been overrided!')
+        alert(`Current allocated TA hours for : ${courseName.toUpperCase()}`+' have been overridden!')
       }, (err=> {
         alert(err.error);
       }))

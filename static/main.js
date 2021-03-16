@@ -674,7 +674,7 @@ function InstructorViewComponent_div_1_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](19, "br");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](20, "br");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](21, "button", 10);
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function InstructorViewComponent_div_1_Template_button_click_21_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r18); const ctx_r22 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](); return ctx_r22.override(); });
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("click", function InstructorViewComponent_div_1_Template_button_click_21_listener() { _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵrestoreView"](_r18); const ctx_r22 = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵnextContext"](); return ctx_r22.Override(); });
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](22, "Override allocated hours");
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
@@ -1035,8 +1035,8 @@ class InstructorViewComponent {
         }
     }
     // function to override current allocated hours for a course
-    override() {
-        if (this.activeUser && this.admn && this.subjectq && this.catalogq && this.newHours) {
+    Override() {
+        if (this.activeUser && this.admn && this.subject && this.catalog && this.newHours && this.extension) {
             const courseName = this.subject + this.catalog + this.extension; // create course name
             const body = {
                 instructor: this.inName,
@@ -1047,7 +1047,7 @@ class InstructorViewComponent {
                 desc: this.desc.toUpperCase()
             };
             this.http.put(`/api/courses/${courseName.toUpperCase()}`, body, this.options).subscribe(() => {
-                alert(`Current allocated TA hours for : ${courseName.toUpperCase()}` + ' have been overrided!');
+                alert(`Current allocated TA hours for : ${courseName.toUpperCase()}` + ' have been overridden!');
             }, (err => {
                 alert(err.error);
             }));
