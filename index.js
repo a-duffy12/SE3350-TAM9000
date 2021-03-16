@@ -259,6 +259,30 @@ router.route("/courses/:courseName")
         }
     })
 
+router.put("/courses/:courseName/:reqTA", (req, res) => {
+    if (sanitizeInput(req.params.courseName))
+    {
+        cdata = getData(courseData); // get up to date course data
+
+        const ind = cdata.findIndex(c => c.courseName === req.params.courseName); // find index of course
+        if (ind >= 0) // if the course exists
+        {
+
+            cdata[ind].requireTA = req.params.reqTA;
+            res.send("Updated TA requirement for course");
+            setData(cdata, courseFile); // send updated course data to JSON file
+        }
+        else if (ind < 0) // if the course does not exist
+        {
+            res.status(404).send(`No course found with course name: ${req.params.courseName}`);
+        }
+    }
+    else
+    {
+        res.status(400).send("Invalid input!");
+    }
+})
+
 // search course descriptions GET
 router.get("/courses/key/:keyword", (req, res) => {
 
@@ -467,12 +491,14 @@ router.post("/questions/:courseID",(req, res) => {
     }
 })
 
+
 // test hash value
 router.get("/test/:password", (req, res) => {
     bcrypt.hash(req.params.password, salt, (err, hash) => {
         res.send(hash); // return the hashed value
     })
 })
+
 
 app.use("/api", router); // install router object path
 

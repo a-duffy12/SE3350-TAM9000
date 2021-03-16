@@ -19,6 +19,9 @@ export class InstructorViewComponent implements OnInit {
   catalog = ''; // make upper case
   subject = ''; // make upper case
   extension = ''; // make upper case
+  catalogSearch = '';
+  subjectSearch = '';
+  extensionSearch = '';
   hours=0;
   numOldStudent=0;
   numStudent=0;
@@ -30,7 +33,8 @@ export class InstructorViewComponent implements OnInit {
   courseCode = '';
   rank = '';
   rdata: any;
-  requireTA: boolean = false;
+  requireTA: boolean = true;
+  requireTA2: boolean = true;
   labelPosition: 'before' | 'after' = 'before';
 
   courseCatalog = '';
@@ -80,7 +84,7 @@ export class InstructorViewComponent implements OnInit {
   // function to view applicants for their course
   viewApplicants(): void {
     this.rdata = undefined;
-    if (this.activeUser && (this.inst || this.admn) && this.subjecta && this.cataloga)
+    if (this.activeUser && (this.inst || this.admn) && this.subjecta && this.catalog)
     {
       const courseName = this.subjecta + this.cataloga + this.extensiona; // create course inName
       this.http.get(`/api/rank/${courseName.toUpperCase()}/${this.activeUser}`).subscribe((data:any) => {
@@ -161,6 +165,17 @@ export class InstructorViewComponent implements OnInit {
     else
     {
       alert("Invalid input!");
+    }
+  }
+
+  changeTAReq()
+  {
+    if(this.catalogSearch && this.subjectSearch && this.extensionSearch)
+    {
+      const courseName = this.subjectSearch + this.catalogSearch + this.extensionSearch;
+      this.http.put(`/api/courses/${courseName}/${this.requireTA2}`, null, this.options).subscribe( () => {
+        alert(`Changed TA requirement for ${courseName} to ${this.requireTA2}`);
+      })
     }
   }
 

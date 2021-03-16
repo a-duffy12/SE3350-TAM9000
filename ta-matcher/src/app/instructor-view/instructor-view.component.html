@@ -15,6 +15,16 @@
 </div>
 
 <div *ngIf = "admn">
+  <h2>Adjust TA requirement for Course</h2><br><br>
+
+  Subject: <input placeholder="ex. SE" [(ngModel)]="subjectSearch"><br><br>
+  Catalog: <input placeholder="ex. 3350" [(ngModel)]="catalogSearch"><br><br>
+  Extension: <input placeholder="ex. A,B" [(ngModel)]="extensionSearch"><br><br>
+  <mat-checkbox [labelPosition]="labelPosition" [(ngModel)]="requireTA2">Require TA: </mat-checkbox><br><br>
+  <button (click)="changeTAReq()">Adjust TA requirement</button>
+</div>
+
+<div *ngIf = "admn">
   <h2>Override allocated hours for a course</h2><br><br>
 
   Subject: <input placeholder="ex. SE" [(ngModel)]="subject"><br><br>
@@ -32,7 +42,7 @@
   Subject: <input placeholder="ex. SE" [(ngModel)]="subjectq"><br><br>
   Catalog: <input placeholder="ex. 3350" [(ngModel)]="catalogq"><br><br>
   Extension: <input placeholder="ex. A,B" [(ngModel)]="extensionq"><br><br>
-  <p *ngIf="data.numQuestions.length > 0">Create Yes/No questions only!</p>
+
   <div *ngFor="let question of data.numQuestions">
     <app-create-question [id]="question"></app-create-question>
   </div>
