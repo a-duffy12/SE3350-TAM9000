@@ -58,9 +58,15 @@
     <p>Displaying search results for {{rdata[0].courseCode}}</p>
     <ul class="list">
       <li *ngFor="let r of rdata" class="list-li">
-        <span>{{r.rank}}: {{r.name}} ({{r.email}})</span>
-        <span>Status: {{r.status}}</span>
-        <span>Hours: {{r.hours}} student</span>
+        <span>{{r.rank}}: {{r.name}} ({{r.email}})</span><br>
+        <span>Status: {{r.status}}</span><br>
+        <span>Hours: {{r.hours}} student</span><br><br>
+        <span>
+          <li *ngFor="let s of r.questions;let i = index" class="list-li">
+            <span>Question {{i + 1}}: {{s.question}}</span><br>
+            <span>Answer: {{s.answer}}</span>
+          </li>
+        </span>
       </li>
     </ul>
   </div>
