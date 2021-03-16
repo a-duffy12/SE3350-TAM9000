@@ -29,6 +29,8 @@ export class InstructorViewComponent implements OnInit {
   courseCode = '';
   rank = '';
   rdata: any;
+  requireTA: boolean = false;
+  labelPosition: 'before' | 'after' = 'before';
 
   courseCatalog = '';
   courseCodeAuto = '';
@@ -125,7 +127,8 @@ export class InstructorViewComponent implements OnInit {
         hours: this.hours,
         enrolledLast: this.numOldStudent,
         enrolled: this.numStudent,
-        desc: this.desc.toUpperCase()
+        desc: this.desc.toUpperCase(),
+        reqTA: this.requireTA
       }
 
       this.http.post(`/api/courses/${courseName.toUpperCase()}`, body, this.options).subscribe(() => {

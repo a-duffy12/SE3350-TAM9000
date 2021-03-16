@@ -199,6 +199,7 @@ router.route("/courses/:courseName")
                 newCourse.enrolled = req.body.enrolled; // set number of students enrolled
                 newCourse.hoursLast = req.body.hours; // set number of hours from last year
                 newCourse.hours = Math.round(newCourse.hoursLast * (newCourse.enrolled / newCourse.enrolledLast)); // set number of house
+                newCourse.requireTA = req.body.reqTA; // set if the course needs a TA
                 newCourse.desc = req.body.desc; // set description
                 newCourse.applicantRanks = [];
 

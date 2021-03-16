@@ -53,5 +53,29 @@
         "hours": 30,
         "desc": "BUSINESS FOR ENGINEERS",
         "applicantRanks": []
+    },
+    {
+        "courseName": "TE6969A",
+        "instructor": "Cool Guy",
+        "instructorEmail": "coolguy69@uwo.ca",
+        "enrolledLast": 1000,
+        "enrolled": 6969,
+        "hoursLast": 10,
+        "hours": 70,
+        "requireTA": true,
+        "desc": "COOL KIDS ONLY CLUB",
+        "applicantRanks": []
+    },
+    {
+        "courseName": "TE6969B",
+        "instructor": "Cool Guy",
+        "instructorEmail": "coolguy69@uwo.ca",
+        "enrolledLast": 1000,
+        "enrolled": 6969,
+        "hoursLast": 10,
+        "hours": 70,
+        "requireTA": false,
+        "desc": "COOL KIDS ONLY CLUB",
+        "applicantRanks": []
     }
 ]

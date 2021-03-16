@@ -9,8 +9,8 @@
   Hours Last Year: <input placeholder="ex. 30" type="number" [(ngModel)]="hours"><br><br>
   Previous Enrollment: <input placeholder="ex. 100" type="number" [(ngModel)]="numOldStudent"><br><br>
   Current Enrollment: <input placeholder="ex. 100" type="number" [(ngModel)]="numStudent"><br><br>
+  <mat-checkbox [labelPosition]="labelPosition" [(ngModel)]="requireTA">Require TA: </mat-checkbox><br><br>
   Description: <input placeholder="" [(ngModel)]="desc"><br><br>
-
   <button (click)="addCourse()">Create Course</button>
 </div>
 
