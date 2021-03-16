@@ -1,14 +1,26 @@
-<div *ngIf = "activeUser">
-  <h2>Post a course</h2><br><br>
+<div *ngIf = "admn">
+  <h2>Import a course</h2><br><br>
 
   Subject: <input placeholder="ex. SE" [(ngModel)]="subject"><br><br>
   Catalog: <input placeholder="ex. 3350" [(ngModel)]="catalog"><br><br>
   Extension: <input placeholder="ex. A,B" [(ngModel)]="extension"><br><br>
+  Instructor Name: <input placeholder="ex. John Smith" [(ngModel)]="inName"><br><br>
+  Instructor Email: <input placeholder="ex. jsmith39@uwo.ca" [(ngModel)]="inEmail"><br><br>
   Hours Last Year: <input placeholder="ex. 30" type="number" [(ngModel)]="hours"><br><br>
   Previous Enrollment: <input placeholder="ex. 100" type="number" [(ngModel)]="numOldStudent"><br><br>
   Current Enrollment: <input placeholder="ex. 100" type="number" [(ngModel)]="numStudent"><br><br>
   Description: <input placeholder="" [(ngModel)]="desc"><br><br>
 
+  <button (click)="addCourse()">Create Course</button>
+</div>
+
+<div *ngIf = "inst">
+
+  <h2>Add questions</h2><br><br>
+
+  Subject: <input placeholder="ex. SE" [(ngModel)]="subjectq"><br><br>
+  Catalog: <input placeholder="ex. 3350" [(ngModel)]="catalogq"><br><br>
+  Extension: <input placeholder="ex. A,B" [(ngModel)]="extensionq"><br><br>
   <p *ngIf="data.numQuestions.length > 0">Create Yes/No questions only!</p>
   <div *ngFor="let question of data.numQuestions">
     <app-create-question [id]="question"></app-create-question>
@@ -17,9 +29,14 @@
     <button (click)="data.addQuestion()">Add Question</button>
     <button (click)="data.removeQuestion()">Remove Question</button>
   </div>
-  <button (click)="addCourse()">Create Course</button>
 
-  <br><br><br><h2>Rank applicants</h2><br><br>
+  <button (click)="addQuestions()">Add Questions</button>
+
+</div>
+
+<div *ngIf = "inst">
+
+  <h2>Rank applicants</h2><br><br>
 
   Applicant Email: <input placeholder="ex. bob@uwo.ca" [(ngModel)]="email"><br><br>
   Course Code: <input placeholder="ex. SE3350" [(ngModel)]="courseCode"><br><br>
@@ -27,19 +44,16 @@
 
   <button (click)="rankApplicant()">Rank Applicant</button>
 
-  <br><br><br><h2>Automatically rank applicants</h2><br><br>
+</div>
 
-  Course Catalog: <input placeholder="ex. SE" [(ngModel)]="courseCatalog"><br><br>
-  Course Code: <input placeholder="ex. 3350" [(ngModel)]="courseCodeAuto"><br><br>
-  Course Extension: <input placeholder="ex. B" [(ngModel)]="courseExt"><br><br>
+<div *ngIf = "inst || admn">
+  <h2>View applicants</h2><br><br>
 
-  <button (click)="autoRankApplicants()">Automatically Rank Applicants</button><br><br>
+  Course Catalog: <input placeholder="ex. SE" [(ngModel)]="subjecta"><br><br>
+  Course Code: <input placeholder="ex. 3350" [(ngModel)]="cataloga"><br><br>
+  Course Extension: <input placeholder="ex. B" [(ngModel)]="extensiona"><br><br>
 
-  Course Catalog: <input placeholder="ex. SE" [(ngModel)]="courseCatalog"><br><br>
-  Course Code: <input placeholder="ex. 3350" [(ngModel)]="courseCodeAuto"><br><br>
-  Course Extension: <input placeholder="ex. B" [(ngModel)]="courseExt"><br><br>
-
-  <button (click)="autoRankApplicants()">Automatically Rank Applicants</button><br><br>
+  <button (click)="viewApplicants()">View Applicants</button><br><br>
   <div *ngIf="rdata">
     <p>Displaying search results for {{rdata[0].courseCode}}</p>
     <ul class="list">
@@ -51,3 +65,4 @@
     </ul>
   </div>
 </div>
+

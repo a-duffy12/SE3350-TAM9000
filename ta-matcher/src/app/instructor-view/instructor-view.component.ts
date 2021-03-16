@@ -19,12 +19,12 @@ export class InstructorViewComponent implements OnInit {
   catalog = ''; // make upper case
   subject = ''; // make upper case
   extension = ''; // make upper case
-  instructor=''; // get from active account
   hours=0;
   numOldStudent=0;
   numStudent=0;
   desc=''; // make descriptions upper case before sending to back end
-  instructorName='';
+  inName='';
+  inEmail='';
   email = '';
   courseCode = '';
   rank = '';
@@ -33,6 +33,15 @@ export class InstructorViewComponent implements OnInit {
   courseCatalog = '';
   courseCodeAuto = '';
   courseExt = '';
+  inst = false;
+  admn = false;
+
+  cataloga = ''; // make upper case
+  subjecta = ''; // make upper case
+  extensiona = ''; // make upper case
+  catalogq = ''; // make upper case
+  subjectq = ''; // make upper case
+  extensionq = ''; // make upper case
 
   constructor(private http: HttpClient, private val: Validator, public data: ShareDataService)
   {
@@ -47,63 +56,102 @@ export class InstructorViewComponent implements OnInit {
 
           if (data.type == "instructor")
           {
-            this.instructorName = data.fName + " " + data.lName; // build instructor name
+            this.inst = true;
+            this.admn = false;
+          }
+          else if (data.type == "admin")
+          {
+            this.admn = true;
+            this.inst = false;
           }
         });
+      }
+      else
+      {
+        this.inst = false;
+        this.admn = false;
       }
     });
   }
 
-  rankApplicant(): void {
-    const body = {
-      rank: this.rank,
-      email: this.email,
-      courseCode: this.courseCode
-    }
-
-    this.http.post(`/api/rank/${this.activeUser}`, body, this.options).subscribe(() => {
-      alert(`Applicant ${this.email} for ${this.courseCode} ranked ${this.rank}`);
-    }, (err => {
-      alert(err.error);
-    })
-    )
-  }
-
-  autoRankApplicants(): void {
+  // function to view applicants for their course
+  viewApplicants(): void {
     this.rdata = undefined;
-    this.http.get(`/api/rank/${this.courseCatalog.toUpperCase() + this.courseCodeAuto + this.courseExt.toUpperCase()}/${this.activeUser}`).subscribe((data:any) => {
-      this.rdata = data;
-      alert(`Applicants for ${this.courseCatalog + this.courseCodeAuto + this.courseExt} ranked`);
-    }, (err => {
-      alert(err.error);
-    }));
+    if (this.activeUser && (this.inst || this.admn) && this.subjecta && this.cataloga)
+    {
+      const courseName = this.subjecta + this.cataloga + this.extensiona; // create course inName
+      this.http.get(`/api/rank/${courseName.toUpperCase()}/${this.activeUser}`).subscribe((data:any) => {
+        this.rdata = data;
+        alert(`Retrieved TA applications for course: ${courseName.toUpperCase()}`);
+      }, (err => {
+        alert(err.error);
+      }));
+    }
   }
 
-  addCourse(): void {
-    if (this.activeUser && this.subject && this.catalog && this.extension && this.hours && this.numOldStudent && this.numStudent && this.desc && this.instructorName)
+  // function to rank applicants for their course
+  rankApplicant(): void {
+
+    if (this.activeUser && this.inst && this.rank && this.email) // instructors can manually rank applicants
     {
+      const body = {
+        rank: this.rank,
+        email: this.email,
+        courseCode: this.courseCode
+      }
+
+      this.http.post(`/api/rank/${this.activeUser}`, body, this.options).subscribe(() => {
+        alert(`Applicant ${this.email} for ${this.courseCode} ranked ${this.rank}`);
+      }, (err => {
+        alert(err.error);
+      })
+      )
+    }
+    else
+    {
+      alert("Invalid input!");
+    }
+  }
+
+  // function to add a course
+  addCourse(): void {
+    if (this.activeUser && this.admn && this.subject && this.catalog && this.extension && this.hours && this.numOldStudent && this.numStudent && this.desc && this.inName && this.inEmail)
+    {
+
       const courseName = this.subject + this.catalog + this.extension; // create course name
       const body = {
-        instructor: this.instructorName,
-        instructorEmail: this.activeUser,
+        instructor: this.inName,
+        instructorEmail: this.inEmail,
         hours: this.hours,
         enrolledLast: this.numOldStudent,
         enrolled: this.numStudent,
         desc: this.desc.toUpperCase()
       }
-      const questions = this.data.questions;
 
       this.http.post(`/api/courses/${courseName.toUpperCase()}`, body, this.options).subscribe(() => {
-        alert(`Created course with name: ${courseName}`);
+        alert(`Created course with name: ${courseName.toUpperCase()}`);
       }, (err => {
         alert(err.error);
       })
       )
+    }
+    else
+    {
+      alert("Invalid input!");
+    }
+  }
 
+  // fuction to add questions to a course
+  addQuestions()
+  {
+    if (this.activeUser && this.inst && this.subjectq && this.catalogq)
+    {
+      const courseName = this.subjectq + this.catalogq + this.extensionq; // create course name
+      const questions = this.data.questions;
       this.http.post(`/api/questions/${courseName.toUpperCase()}`, questions, this.options).subscribe(() => {
-        console.log("Questions created");
+        alert(`Created questions for course: ${courseName.toUpperCase()}`)
       }, (err => {
-        console.log(err.error);
+        alert(err.error);
       }))
     }
     else

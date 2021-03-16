@@ -233,6 +233,30 @@ router.route("/courses/:courseName")
             res.status(400).send("Invalid input!");
         }
     })
+    .put((req, res) => { // overwrite number of TA hours available
+
+        if (sanitizeInput(req.params.courseName) && sanitizeInput(req.body))
+        {
+            cdata = getData(courseData); // get course data
+
+            const ind = cdata.findIndex(c => c.courseName === req.params.courseName); // find index of the the course if it exists
+
+            if (ind >= 0) // if the course already exists
+            {
+                cdata[ind].hours = req.body.hours;
+                res.send(`Updated hours for course: ${req.params.courseName}`); // send message
+                setData(cdata, courseFile); // send updated course data to JSON file
+            }
+            else if (ind < 0) // course does not exist
+            {
+                res.status(404).send(`The course: ${req.params.courseName} does not exist!`);
+            }
+        }
+        else
+        {
+            res.status(400).send("Invalid input!");
+        }
+    })
 
 // search course descriptions GET
 router.get("/courses/key/:keyword", (req, res) => {
@@ -274,7 +298,6 @@ router.post("/application/:email", (req, res) => {
     const email = req.params.email;
     const answers = req.body.answer;
     const appsJSON = JSON.parse(JSON.stringify(appsData));
-    // TODO: check if the course exists before writing to the application JSON
     const courseJSON = JSON.parse(JSON.stringify(courseData));
     const courseExists = courseJSON.findIndex(c => c.courseName == answers.base[0]);
 
@@ -315,8 +338,8 @@ router.delete("/application/delete/:email", (req, res) => {
             res.status(400).send("Invalid input!");
         }
 })
-    
-// Rank applicants POST
+ 
+// Rank applicant POST
 router.post("/rank/:user", (req, res) => {
 
     const appsJSON = JSON.parse(JSON.stringify(appsData));
@@ -344,7 +367,7 @@ router.post("/rank/:user", (req, res) => {
         {
             if (cdata[ind].instructorEmail == req.params.user || udata[ind2].type == "admin") 
             {
-                applicant.rank = rank;
+                applicant.instructorRank = rank;
 
                 setData(appsJSON, appsFile);
                 res.send(`Successfully updated ranking for applicant: ${email} for ${course}`);
@@ -365,7 +388,7 @@ router.post("/rank/:user", (req, res) => {
     }
 });
 
-// get rankings via algorithm
+// get all applicants for a course GET
 router.get("/rank/:course/:user", (req, res) => {
 
     if (sanitizeInput(req.params.course) && sanitizeEmail(req.params.user))
@@ -384,12 +407,7 @@ router.get("/rank/:course/:user", (req, res) => {
             {
                 if (cdata[ind].instructorEmail == req.params.user || udata[ind2].type == "admin") // creates a ranking
                 {
-                    // algorithm
                     let apps = [];
-                    let ones = [];
-                    let twos = [];
-                    let threes = [];
-                    let ranks = [];
 
                     const adata = getData(appsData); // get application data
 
@@ -401,54 +419,8 @@ router.get("/rank/:course/:user", (req, res) => {
                         }
                     }
 
-                    // check status
-                    for (let a in apps)
-                    {
-                        if (apps[a].status == 1)
-                        {
-                            ones.push(apps[a]);
-                        }
-                        else if (apps[a].status == 2)
-                        {
-                            twos.push(apps[a]);
-                        }
-                        else if (apps[a].status == 3)
-                        {
-                            threes.push(apps[a]);
-                        }
-                    }
-
-                    // use student's preferences
-                    ones = ones.sort((a, b) => a.courseRank - b.courseRank);
-                    twos = twos.sort((a, b) => a.courseRank - b.courseRank);
-                    threes = threes.sort((a, b) => a.courseRank - b.courseRank);
-                    
-                    for (let o in ones)
-                    {
-                        ranks.push(ones[o]);
-                    }
-
-                    for (let t in twos)
-                    {
-                        ranks.push(twos[t]);
-                    }
-
-                    for (let t in threes)
-                    {
-                        ranks.push(threes[t]);
-                    }
-
-                    for (let r in ranks)
-                    {
-                        ranks[r].rank = Number(r)+1; // apply rank
-
-                        let ind3 = adata.findIndex(u => u.email == ranks[r].email && u.courseCode == ranks[r].courseCode);
-                        adata[ind3].rank = Number(r)+1; // set rank in application file
-                    }
-
                     setData(adata, appsFile); // set application data
-
-                    res.send(ranks); // send rank
+                    res.send(apps); // send rank
                 }
                 else // not allowed to get a ranking
                 {
@@ -474,16 +446,24 @@ router.get("/courses", (req, res) => {
 
 //submit course questions
 router.post("/questions/:courseID",(req, res) => {
-    const courseName = req.params.courseID;
-    const questions = req.body;
-    const qJSON = getData(questionsData);
-    let obj = {
-        courseID: courseName,
-        courseQuestions: questions
+    
+    if (sanitizeInput(req.params.courseID) && sanitizeInput(req.body))
+    {
+        const courseName = req.params.courseID;
+        const questions = req.body;
+        const qJSON = getData(questionsData);
+        let obj = {
+            courseID: courseName,
+            courseQuestions: questions
+        }
+        qJSON.push(obj);
+        setData(qJSON,questionsFile);
+        res.send(qJSON);
     }
-    qJSON.push(obj);
-    setData(qJSON,questionsFile);
-    res.send(qJSON);
+    else 
+    {
+        res.status(400).send("Invalid input!");
+    }
 })
 
 // test hash value

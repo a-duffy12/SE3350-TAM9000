@@ -6,6 +6,7 @@
         "status": 1,
         "hours": 5,
         "courseRank": 1,
+        "instructorRank": null,
         "questions": [
             {
                 "question": "Do you know the fundamentals of networking",
@@ -19,8 +20,7 @@
                 "question": "Are you a registered sex offender",
                 "answer": false
             }
-        ],
-        "rank": 1
+        ]
     },
     {
         "courseCode": "ECE3375B",
@@ -29,6 +29,7 @@
         "status": 2,
         "hours": 10,
         "courseRank": 1,
+        "instructorRank": null,
         "questions": [
             {
                 "question": "Do you know the fundamentals of networking",
@@ -42,8 +43,7 @@
                 "question": "Are you a registered sex offender",
                 "answer": false
             }
-        ],
-        "rank": 3
+        ]
     },
     {
         "courseCode": "ECE3375B",
@@ -52,6 +52,7 @@
         "status": 1,
         "hours": 10,
         "courseRank": 2,
+        "instructorRank": null,
         "questions": [
             {
                 "question": "Do you know the fundamentals of networking",
@@ -65,7 +66,6 @@
                 "question": "Are you a registered sex offender",
                 "answer": true
             }
-        ],
-        "rank": 2
+        ]
     }
 ]
