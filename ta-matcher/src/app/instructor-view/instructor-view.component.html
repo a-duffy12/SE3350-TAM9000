@@ -21,7 +21,7 @@
   Subject: <input placeholder="ex. SE" [(ngModel)]="subjectq"><br><br>
   Catalog: <input placeholder="ex. 3350" [(ngModel)]="catalogq"><br><br>
   Extension: <input placeholder="ex. A,B" [(ngModel)]="extensionq"><br><br>
-  <p *ngIf="data.numQuestions.length > 0">Create Yes/No questions only!</p>
+
   <div *ngFor="let question of data.numQuestions">
     <app-create-question [id]="question"></app-create-question>
   </div>

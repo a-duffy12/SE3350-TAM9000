@@ -77,7 +77,7 @@ export class InstructorViewComponent implements OnInit {
   // function to view applicants for their course
   viewApplicants(): void {
     this.rdata = undefined;
-    if (this.activeUser && (this.inst || this.admn) && this.subjecta && this.cataloga)
+    if (this.activeUser && (this.inst || this.admn) && this.subjecta && this.catalog)
     {
       const courseName = this.subjecta + this.cataloga + this.extensiona; // create course inName
       this.http.get(`/api/rank/${courseName.toUpperCase()}/${this.activeUser}`).subscribe((data:any) => {
