@@ -22,11 +22,5 @@
         "name": "Alice",
         "email": "alice@uwo.ca",
         "hours": 5
-    },
-    {
-        "courseName": "ECE3375B",
-        "name": "Kate",
-        "email": "kate@uwo.ca",
-        "hours": 1
     }
 ]

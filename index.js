@@ -466,12 +466,12 @@ router.get("/rank/:course/:user", (req, res) => {
     }
 })
 
-// get all courses
+// get all courses GET
 router.get("/courses", (req, res) => {
     res.send(getData(courseData)); // get all courses data
 });
 
-//submit course questions
+//submit course questions POST
 router.post("/questions/:courseID",(req, res) => {
     
     if (sanitizeInput(req.params.courseID) && sanitizeInput(req.body))
@@ -493,8 +493,8 @@ router.post("/questions/:courseID",(req, res) => {
     }
 })
 
-// algorithm to match TAs to courses
-router.get("/matches/:course/:user/:priority", (req, res) => {
+// algorithm to match TAs to courses GET
+router.get("/algorithm/:course/:user/:priority", (req, res) => {
 
     if (sanitizeInput(req.params.course) && sanitizeInput(req.params.priority))
     {
@@ -598,6 +598,54 @@ router.get("/matches/:course/:user/:priority", (req, res) => {
         {
             res.status(400).send(`Error retrieving course: ${req.params.course} for user: ${req.params.user}`);
         }
+    }
+    else
+    {
+        res.status(400).send("Invalid input!");
+    }
+})
+
+// get TA matches for a course GET
+router.get("/matches/:course/:user", (req, res) => {
+
+    if (sanitizeInput(req.params.course) && sanitizeInput(req.params.priority))
+    {
+        cdata = getData(courseData);
+        udata = getData(userData);
+        mdata = getData(matchesData);
+
+        const ind1 = cdata.findIndex(c => c.courseName === req.params.course); // find index of the the course if it exists
+        const ind2 = udata.findIndex(u => u.email == req.params.user); // find user if they exist
+
+        if (ind1 >= 0 && ind2 >= 0)
+        {
+            if (cdata[ind1].instructorEmail == req.params.user || udata[ind2].type == "admin")
+            {
+                let matches = [];
+
+                for (let m in mdata)
+                {
+                    if (mdata[m].courseName == req.params.course) // get TA assignments for the requested course
+                    {
+                        matches.push(mdata[m]);
+                    }
+                }
+
+                res.send(matches);
+            }
+            else
+            {
+                res.status(400).send(`The user: ${req.params.user} is not authorized to view these matches!`);
+            }
+        }
+        else
+        {
+            res.status(400).send(`Error retrieving course: ${req.params.course} for user: ${req.params.user}`);
+        }
+    }
+    else
+    {
+        res.status(400).send("Invalid input!");
     }
 })
 

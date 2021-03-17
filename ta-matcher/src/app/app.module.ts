@@ -11,7 +11,8 @@ import { InstructorViewComponent } from './instructor-view/instructor-view.compo
 import { ApplicationComponent } from './application/application.component';
 import { CreateQuestionComponent } from './create-question/create-question.component'
 import { CourseSearchComponent } from './course-search/course-search.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatchingComponent } from './matching/matching.component'
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     InstructorViewComponent,
     ApplicationComponent,
     CreateQuestionComponent,
-    CourseSearchComponent
+    CourseSearchComponent,
+    MatchingComponent
   ],
   imports: [
     BrowserModule,
