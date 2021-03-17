@@ -542,12 +542,38 @@ router.get("/matches/:course/:user/:priority", (req, res) => {
                 let cap = 0; // track hours
                 let acount = 0; // track applicants
 
-                while (cap <= cdata[ind1].hours) // so long as there are unallocated TA hours
+                mdata = mdata.filter(match => match.courseName != req.params.course); // remove existing matches for this course
+
+                while (cap < cdata[ind1].hours) // so long as there are unallocated TA hours
                 {
-                    cap += apps[acount].hours; // add allocated hours
-                    mats.push(apps[acount]); // assign candidate to course
-                    acount++; // increment tracker
+                    if (apps[acount])
+                    {
+                        ind3 = mdata.findIndex(m => m.email === apps[acount].email); // check to see if TA is already assigned
+
+                        if (ind3 >= 0) // ta is already assigned
+                        {
+                            acount++; // increment tracker
+                        }
+                        else if (ind3 < 0)
+                        {
+                            cap += apps[acount].hours; // add allocated hours
+                            mats.push(apps[acount]); // assign candidate to course
+                            acount++; // increment tracker
+                        }
+                    }
+                    else
+                    {
+                        console.log("No more applicants\n\n");
+                        break;
+                    }
                 }
+
+                if (cap > cdata[ind1].hours) // if there are more hours allocated than available
+                {
+                    let reduct = mats.pop(); // get last match
+                    reduct.hours -= (cap-cdata[ind1].hours); // reduce allocated hours
+                    mats.push(reduct); // add back to matches
+                }   
 
                 for (let m in mats) // add to matches json 
                 {

@@ -1,6 +1,6 @@
 [
     {
-        "courseName": "ECE3375B",
+        "courseName": "SE3350B",
         "name": "Dean",
         "email": "dean@uwo.ca",
         "hours": 5
@@ -22,5 +22,11 @@
         "name": "Alice",
         "email": "alice@uwo.ca",
         "hours": 5
+    },
+    {
+        "courseName": "ECE3375B",
+        "name": "Kate",
+        "email": "kate@uwo.ca",
+        "hours": 1
     }
 ]
