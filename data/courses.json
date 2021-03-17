@@ -62,7 +62,7 @@
         "enrolled": 6969,
         "hoursLast": 10,
         "hours": 70,
-        "requireTA": true,
+        "requireTA": "false",
         "desc": "COOL KIDS ONLY CLUB",
         "applicantRanks": []
     },

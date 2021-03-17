@@ -10,7 +10,7 @@ export class ShareDataService {
 
   addQuestion(){
     this.numQuestions.push({num:this.numQuestions.length, display:`Question ${this.numQuestions.length+1}`});
-    this.questions.push({question:""});
+    this.questions.push("");
   }
 
   removeQuestion(){
