@@ -8,11 +8,13 @@ const userData = require("./data/accounts.json"); // json data for user accounts
 const appsData = require("./data/applications.json"); // json data for user applications
 const courseData = require("./data/courses.json"); // json data for courses
 const questionsData = require("./data/questions.json"); // json data for course questions
+const matchesData = require("./data/matches.json"); // json data for TA-course matches
 
 const userFile = "./data/accounts.json"; // file holding json data for user accounts
 const appsFile = "./data/applications.json"; // file holding json data for applications
 const courseFile = "./data/courses.json"; // file holding json data for courses
 const questionsFile = "./data/questions.json"; // file holding json data for course questions
+const matchFile = "./data/matches.json"; // file holding json data for TA-course matches
 
 const salt = 12;
 
@@ -349,11 +351,11 @@ router.delete("/application/delete/:email", (req, res) => {
             if (appIndex >= 0)
             {               
                 adata = adata.filter(a => a.email != req.params.email); 
-                res.send(`Deleted schedule with name: ${req.params.email}`)               
+                res.send(`Deleted applicantion for student: ${req.params.email}`)               
             }
             else if (appIndex < 0) 
             {
-                res.status(404).send(`No schedule found with name: ${req.params.email}`);
+                res.status(404).send(`No applicantion found for student: ${req.params.email}`);
             }
     
             setData(adata, appsFile); 
@@ -491,6 +493,87 @@ router.post("/questions/:courseID",(req, res) => {
     }
 })
 
+// algorithm to match TAs to courses
+router.get("/matches/:course/:user/:priority", (req, res) => {
+
+    if (sanitizeInput(req.params.course) && sanitizeInput(req.params.priority))
+    {
+        cdata = getData(courseData);
+        udata = getData(userData);
+        adata = getData(appsData);
+        mdata = getData(matchesData);
+
+        const ind1 = cdata.findIndex(c => c.courseName === req.params.course); // find index of the the course if it exists
+        const ind2 = udata.findIndex(u => u.email == req.params.user); // find user if they exist
+
+        if (ind1 >= 0 && ind2 >= 0)
+        {
+
+            if (cdata[ind1].instructorEmail == req.params.user || udata[ind2].type == "admin")
+            {
+                let mats = [];
+                let apps = [];
+
+                for (let a in adata) // get all relevant applicants
+                {
+                    if (adata[a].courseCode == req.params.course)
+                    {
+                        apps.push(adata[a]);
+                    }
+                }
+
+                if (req.params.priority == "instructor")
+                {
+                    apps = apps.sort((a, b) => a.courseRank - b.courseRank); // sort by applicant preference
+                    apps = apps.sort((a, b) => a.instructorRank - b.instructorRank); // sort by instructor preference
+                }
+                else if (req.params.priority == "applicant")
+                {
+                    apps = apps.sort((a, b) => a.instructorRank - b.instructorRank); // sort by instructor preference
+                    apps = apps.sort((a, b) => a.courseRank - b.courseRank); // sort by applicant preference
+                }
+                else
+                {
+                    res.status(400).send(`Invalid input for priority field!`);
+                }
+
+                apps.sort((a, b) => a.status - b.status); // sort by status
+
+                let cap = 0; // track hours
+                let acount = 0; // track applicants
+
+                while (cap <= cdata[ind1].hours) // so long as there are unallocated TA hours
+                {
+                    cap += apps[acount].hours; // add allocated hours
+                    mats.push(apps[acount]); // assign candidate to course
+                    acount++; // increment tracker
+                }
+
+                for (let m in mats) // add to matches json 
+                {
+                    temp = {}; // temporary object
+                    temp.courseName = mats[m].courseCode;
+                    temp.name = mats[m].name;
+                    temp.email = mats[m].email;
+                    temp.hours = mats[m].hours;
+
+                    mdata.push(temp);
+                }
+
+                setData(mdata, matchFile);
+                res.send(`Matched TAs for course: ${req.params.course}`);
+            }
+            else
+            {
+                res.status(400).send(`The user: ${req.params.user} is not authorized to view these matches!`);
+            }
+        }
+        else
+        {
+            res.status(400).send(`Error retrieving course: ${req.params.course} for user: ${req.params.user}`);
+        }
+    }
+})
 
 // test hash value
 router.get("/test/:password", (req, res) => {
