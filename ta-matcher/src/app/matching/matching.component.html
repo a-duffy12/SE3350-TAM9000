@@ -1,0 +1,23 @@
+<div *ngIf = "inst || admn">
+  <h2>TA Matching</h2><br><br>
+
+  Course Catalog: <input placeholder="ex. SE" [(ngModel)]="subject"><br><br>
+  Course Code: <input placeholder="ex. 3350" [(ngModel)]="catalog"><br><br>
+  Course Extension: <input placeholder="ex. B" [(ngModel)]="extension"><br><br>
+  Priority: <input placeholder="'instructor' or 'applicant'" [(ngModel)]="prior"><br><br>
+
+  <span>
+    <button (click)="generateMatches()">Generate</button>
+    <button (click)="viewMatches()">View Matches</button>
+  </span><br><br>
+
+  <div *ngIf="mdata">
+    <p>Displaying TA matches for {{courseName}}</p>
+    <ul class="list">
+      <li *ngFor="let m of mdata" class="list-li">
+        <span>TA: {{m.name}} ({{m.email}})</span><br>
+        <span>Hours: {{m.hours}}</span><br><br>
+      </li>
+    </ul>
+  </div>
+</div>
