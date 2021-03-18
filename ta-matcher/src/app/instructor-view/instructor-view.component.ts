@@ -179,6 +179,14 @@ export class InstructorViewComponent implements OnInit {
     }
   }
 
+  exportQuestions()
+  {
+    window.open('/api/download');
+    // this.http.get(`/api/download`).subscribe((data:any) => {
+    //   console.log(data);
+    // })
+  }
+
   // function to override current allocated hours for a course
   Override()
   {

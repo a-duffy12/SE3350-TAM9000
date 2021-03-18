@@ -25,6 +25,11 @@
 </div>
 
 <div *ngIf = "admn">
+  <h2>Export Course Questions</h2><br><br>
+  <button (click)="exportQuestions()">Download Questions</button>
+</div>
+
+<div *ngIf = "admn">
   <h2>Override allocated hours for a course</h2><br><br>
 
   Subject: <input placeholder="ex. SE" [(ngModel)]="subject"><br><br>

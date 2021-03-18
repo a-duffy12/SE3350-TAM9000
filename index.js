@@ -499,6 +499,33 @@ router.get("/test/:password", (req, res) => {
     })
 })
 
+// set up file to export course questions
+router.get("/download", (req, res) => {
+    const qData = getData(questionsData);
+    let numQuestions = qData.map(x => x.courseQuestions.length).reduce((x,y) => {
+        return (x > y) ? x : y;
+    });
+    let header = "courseName,";
+    for(let i=0;i<numQuestions;i++){
+        header += "Question " + (i+1);
+        if(i != numQuestions -1) header += ",";
+    }
+    fs.writeFileSync(__dirname + '/exportQuestions.csv' , header + "\n");
+    for(let i=0; i<qData.length;i++){
+        let line = qData[i].courseID+",";
+        for(let j=0; j<qData[i].courseQuestions.length;j++){
+            line += qData[i].courseQuestions[j];
+            if(j != (qData[i].courseQuestions.length-1)) line += ","
+        }
+        fs.appendFileSync(__dirname + '/exportQuestions.csv', line + "\n");
+    }
+    let file=fs.createReadStream(__dirname + '/exportQuestions.csv');
+    var stat = fs.statSync(__dirname +'/exportQuestions.csv');
+    res.setHeader('Content-Length', stat.size);
+    res.setHeader('Content-Type', 'text/csv');
+    res.setHeader('Content-Disposition', 'attachment; filename=exportQuestions.csv');
+    file.pipe(res);
+})
 
 app.use("/api", router); // install router object path
 
