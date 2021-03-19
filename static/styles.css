@@ -16,6 +16,27 @@ h2 {
   padding-left: 100px;
 }
 
+a:link {
+  text-decoration: none;
+  color: rgb(68, 0, 95);
+  background-color: rgb(180, 129, 228);
+}
 
+a:visited {
+  text-decoration: none;
+  color: rgb(68, 0, 95);
+  background-color: rgb(180, 129, 228);
+}
 
+a:hover {
+  text-decoration: underline;
+  color: rgb(251, 255, 13);
+  background-color: rgb(202, 172, 230);
+}
+
+a:active {
+  text-decoration: underline;
+  color: rgb(34, 255, 63);
+  background-color: rgb(202, 172, 230);
+}
 
