@@ -1,47 +1,85 @@
-<div *ngIf = "admn">
-  <h2>Import a course</h2><br><br>
+<div *ngIf="admn">
+  <h2>Import a course</h2>
+  <br /><br />
 
-  Subject: <input placeholder="ex. SE" [(ngModel)]="subject"><br><br>
-  Catalog: <input placeholder="ex. 3350" [(ngModel)]="catalog"><br><br>
-  Extension: <input placeholder="ex. A,B" [(ngModel)]="extension"><br><br>
-  Instructor Name: <input placeholder="ex. John Smith" [(ngModel)]="inName"><br><br>
-  Instructor Email: <input placeholder="ex. jsmith39@uwo.ca" [(ngModel)]="inEmail"><br><br>
-  Hours Last Year: <input placeholder="ex. 30" type="number" [(ngModel)]="hours"><br><br>
-  Previous Enrollment: <input placeholder="ex. 100" type="number" [(ngModel)]="numOldStudent"><br><br>
-  Current Enrollment: <input placeholder="ex. 100" type="number" [(ngModel)]="numStudent"><br><br>
-  <mat-checkbox [labelPosition]="labelPosition" [(ngModel)]="requireTA">Require TA: </mat-checkbox><br><br>
-  Description: <input placeholder="" [(ngModel)]="desc"><br><br>
+  Subject: <input placeholder="ex. SE" [(ngModel)]="subject" /><br /><br />
+  Catalog: <input placeholder="ex. 3350" [(ngModel)]="catalog" /><br /><br />
+  Extension: <input placeholder="ex. A,B" [(ngModel)]="extension" /><br /><br />
+  Instructor Name:
+  <input placeholder="ex. John Smith" [(ngModel)]="inName" /><br /><br />
+  Instructor Email:
+  <input placeholder="ex. jsmith39@uwo.ca" [(ngModel)]="inEmail" /><br /><br />
+  Hours Last Year:
+  <input placeholder="ex. 30" type="number" [(ngModel)]="hours" /><br /><br />
+  Previous Enrollment:
+  <input
+    placeholder="ex. 100"
+    type="number"
+    [(ngModel)]="numOldStudent"
+  /><br /><br />
+  Current Enrollment:
+  <input
+    placeholder="ex. 100"
+    type="number"
+    [(ngModel)]="numStudent"
+  /><br /><br />
+  <mat-checkbox [labelPosition]="labelPosition" [(ngModel)]="requireTA"
+    >Require TA: </mat-checkbox
+  ><br /><br />
+  Description: <input placeholder="" [(ngModel)]="desc" /><br /><br />
   <button (click)="addCourse()">Create Course</button>
 </div>
 
-<div *ngIf = "admn">
-  <h2>Adjust TA requirement for Course</h2><br><br>
+<div *ngIf="admn">
+  <h2>Adjust TA requirement for Course</h2>
+  <br /><br />
 
-  Subject: <input placeholder="ex. SE" [(ngModel)]="subjectSearch"><br><br>
-  Catalog: <input placeholder="ex. 3350" [(ngModel)]="catalogSearch"><br><br>
-  Extension: <input placeholder="ex. A,B" [(ngModel)]="extensionSearch"><br><br>
-  <mat-checkbox [labelPosition]="labelPosition" [(ngModel)]="requireTA2">Require TA: </mat-checkbox><br><br>
+  Subject:
+  <input placeholder="ex. SE" [(ngModel)]="subjectSearch" /><br /><br />
+  Catalog:
+  <input placeholder="ex. 3350" [(ngModel)]="catalogSearch" /><br /><br />
+  Extension:
+  <input placeholder="ex. A,B" [(ngModel)]="extensionSearch" /><br /><br />
+  <mat-checkbox [labelPosition]="labelPosition" [(ngModel)]="requireTA2"
+    >Require TA: </mat-checkbox
+  ><br /><br />
   <button (click)="changeTAReq()">Adjust TA requirement</button>
 </div>
 
-<div *ngIf = "admn">
-  <h2>Override allocated hours for a course</h2><br><br>
+<div *ngIf="admn">
+  <h2>Export Course Questions</h2>
+  <br /><br />
+  <button (click)="exportQuestions()">Download Questions</button>
+</div>
 
-  Subject: <input placeholder="ex. SE" [(ngModel)]="subject"><br><br>
-  Catalog: <input placeholder="ex. 3350" [(ngModel)]="catalog"><br><br>
-  Extension: <input placeholder="ex. A,B" [(ngModel)]="extension"><br><br>
-  Hours: <input placeholder="ex. 20" [(ngModel)]="newHours"><br><br>
+<div *ngIf="admn">
+  <h2>Import Applicant Data</h2>
+  <br /><br />
+  <label for="file">Choose File</label>
+  <input type="file" id="file" /> <br/><br/>
+  <button>Upload</button>
+</div>
+
+<div *ngIf="admn">
+  <h2>Override allocated hours for a course</h2>
+  <br /><br />
+
+  Subject: <input placeholder="ex. SE" [(ngModel)]="subject" /><br /><br />
+  Catalog: <input placeholder="ex. 3350" [(ngModel)]="catalog" /><br /><br />
+  Extension: <input placeholder="ex. A,B" [(ngModel)]="extension" /><br /><br />
+  Hours: <input placeholder="ex. 20" [(ngModel)]="newHours" /><br /><br />
 
   <button (click)="Override()">Override allocated hours</button>
 </div>
 
-<div *ngIf = "inst">
+<div *ngIf="inst">
+  <h2>Add questions</h2>
+  <br /><br />
 
-  <h2>Add questions</h2><br><br>
-
-  Subject: <input placeholder="ex. SE" [(ngModel)]="subjectq"><br><br>
-  Catalog: <input placeholder="ex. 3350" [(ngModel)]="catalogq"><br><br>
-  Extension: <input placeholder="ex. A,B" [(ngModel)]="extensionq"><br><br>
+  Subject: <input placeholder="ex. SE" [(ngModel)]="subjectq" /><br /><br />
+  Catalog: <input placeholder="ex. 3350" [(ngModel)]="catalogq" /><br /><br />
+  Extension:
+  <input placeholder="ex. A,B" [(ngModel)]="extensionq" /><br /><br />
 
   <div *ngFor="let question of data.numQuestions">
     <app-create-question [id]="question"></app-create-question>
@@ -52,46 +90,54 @@
   </div>
 
   <button (click)="addQuestions()">Add Questions</button>
-
 </div>
 
-<div *ngIf = "inst">
+<div *ngIf="inst">
+  <h2>Rank applicants</h2>
+  <br /><br />
 
-  <h2>Rank applicants</h2><br><br>
-
-  Applicant Email: <input placeholder="ex. bob@uwo.ca" [(ngModel)]="email"><br><br>
-  Course Code: <input placeholder="ex. SE3350" [(ngModel)]="courseCode"><br><br>
-  Applicant Rank: <input placeholder="ex. 2" [(ngModel)]="rank"><br><br>
+  Applicant Email:
+  <input placeholder="ex. bob@uwo.ca" [(ngModel)]="email" /><br /><br />
+  Course Code:
+  <input placeholder="ex. SE3350" [(ngModel)]="courseCode" /><br /><br />
+  Applicant Rank: <input placeholder="ex. 2" [(ngModel)]="rank" /><br /><br />
 
   <button (click)="rankApplicant()">Rank Applicant</button>
-
 </div>
 
-<div *ngIf = "inst || admn">
-  <h2>View applicants</h2><br><br>
+<div *ngIf="inst || admn">
+  <h2>View applicants</h2>
+  <br /><br />
 
-  Course Catalog: <input placeholder="ex. SE" [(ngModel)]="subjecta"><br><br>
-  Course Code: <input placeholder="ex. 3350" [(ngModel)]="cataloga"><br><br>
-  Course Extension: <input placeholder="ex. B" [(ngModel)]="extensiona"><br><br>
+  Course Catalog:
+  <input placeholder="ex. SE" [(ngModel)]="subjecta" /><br /><br />
+  Course Code:
+  <input placeholder="ex. 3350" [(ngModel)]="cataloga" /><br /><br />
+  Course Extension:
+  <input placeholder="ex. B" [(ngModel)]="extensiona" /><br /><br />
 
-  <button (click)="viewApplicants()">View Applicants</button><br><br>
+  <button (click)="viewApplicants()">View Applicants</button><br /><br />
   <div *ngIf="rdata">
-    <p>Displaying search results for {{rdata[0].courseCode}}</p>
+    <p>Displaying search results for {{ rdata[0].courseCode }}</p>
     <ul class="list">
       <li *ngFor="let r of rdata" class="list-li">
-        <span>Applicant: {{r.name}} ({{r.email}})</span><br>
-        <span>Instructor Ranking: {{r.instructorRank}}</span><br>
-        <span>Self Ranking: {{r.courseRank}}</span><br>
-        <span>Status: {{r.status}}</span><br>
-        <span>Hours: {{r.hours}}</span><br><br>
+        <span>Applicant: {{ r.name }} ({{ r.email }})</span><br />
+        <span>Instructor Ranking: {{ r.instructorRank }}</span
+        ><br />
+        <span>Self Ranking: {{ r.courseRank }}</span
+        ><br />
+        <span>Status: {{ r.status }}</span
+        ><br />
+        <span>Hours: {{ r.hours }}</span
+        ><br /><br />
         <span>
-          <li *ngFor="let s of r.questions;let i = index" class="list-li">
-            <span>Question {{i + 1}}: {{s.question}}</span><br>
-            <span>Answer: {{s.answer}}</span>
+          <li *ngFor="let s of r.questions; let i = index" class="list-li">
+            <span>Question {{ i + 1 }}: {{ s.question }}</span
+            ><br />
+            <span>Answer: {{ s.answer }}</span>
           </li>
         </span>
       </li>
     </ul>
   </div>
 </div>
-
