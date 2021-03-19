@@ -509,7 +509,7 @@ router.get("/algorithm/:course/:user/:priority", (req, res) => {
         if (ind1 >= 0 && ind2 >= 0)
         {
 
-            if (cdata[ind1].instructorEmail == req.params.user || udata[ind2].type == "admin")
+            if (udata[ind2].type == "admin")
             {
                 let mats = [];
                 let apps = [];
