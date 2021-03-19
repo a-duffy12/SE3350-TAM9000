@@ -55,7 +55,7 @@ export class ApplicationComponent implements OnInit {
   }
 
   submitApplication(){
-    if(confirm("Are you sure to submit this application?")){
+    if(confirm("Are you sure you want to submit this application?")){
       this.http.post<any>(`/api/application/${this.studentEmail}`, {base: [this.course, this.courseTaken, this.courseLoc,this.courseTAd, this.prevExp]}).subscribe((data:any) => {
         alert("Application submitted");
       })

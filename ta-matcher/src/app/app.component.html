@@ -1,26 +1,18 @@
 <head>
 </head>
 <body>
-    <nav class="navbar navbar-expand navbar-dark bg-dark">
-        <div class="navbar-nav">
-            <a class="nav-item nav-link" routerLink="/">Home</a><br>
-            <a class="nav-item nav-link" routerLink="/login">Login</a><br>
+    <nav>
+        <div>
+            <a routerLink="/home">Home</a><br>
+            <a routerLink="/">Login</a><br>
+            <a routerLink="/question" *ngIf="inst">Add Questions</a><br>
+            <a routerLink="/course">Search for Courses</a><br>
         </div>
     </nav>
-    <app-instructor-view></app-instructor-view>
-    <app-course-search></app-course-search>
 
-    <div class="jumbotron">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-8 offset-sm-2">
-                    <router-outlet></router-outlet>
-                </div>
-            </div>
-        </div>
+    <div>
+        <router-outlet></router-outlet>
     </div>
-    <app-application></app-application>
-    <app-matching></app-matching>
 </body>
 
 

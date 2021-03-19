@@ -47,12 +47,6 @@
 </div>
 
 <div *ngIf="admn">
-  <h2>Export Course Questions</h2>
-  <br /><br />
-  <button (click)="exportQuestions()">Download Questions</button>
-</div>
-
-<div *ngIf="admn">
   <h2>Import Applicant Data</h2>
   <br /><br />
   <label for="file">Choose File</label>
@@ -70,26 +64,6 @@
   Hours: <input placeholder="ex. 20" [(ngModel)]="newHours" /><br /><br />
 
   <button (click)="Override()">Override allocated hours</button>
-</div>
-
-<div *ngIf="inst">
-  <h2>Add questions</h2>
-  <br /><br />
-
-  Subject: <input placeholder="ex. SE" [(ngModel)]="subjectq" /><br /><br />
-  Catalog: <input placeholder="ex. 3350" [(ngModel)]="catalogq" /><br /><br />
-  Extension:
-  <input placeholder="ex. A,B" [(ngModel)]="extensionq" /><br /><br />
-
-  <div *ngFor="let question of data.numQuestions">
-    <app-create-question [id]="question"></app-create-question>
-  </div>
-  <div>
-    <button (click)="data.addQuestion()">Add Question</button>
-    <button (click)="data.removeQuestion()">Remove Question</button>
-  </div>
-
-  <button (click)="addQuestions()">Add Questions</button>
 </div>
 
 <div *ngIf="inst">
