@@ -203,7 +203,6 @@ router.route("/courses/:courseName")
                 newCourse.hours = Math.round(newCourse.hoursLast * (newCourse.enrolled / newCourse.enrolledLast)); // set number of house
                 newCourse.requireTA = req.body.reqTA; // set if the course needs a TA
                 newCourse.desc = req.body.desc; // set description
-                newCourse.applicantRanks = [];
 
                 cdata.push(newCourse); // add the new course
                 res.send(`Created course: ${req.params.courseName}`); // send message
@@ -319,26 +318,29 @@ router.get("/courses/key/:keyword", (req, res) => {
 })
 
 // submit TA application PUT
-router.post("/application/:email", (req, res) => {
-    if(!sanitizeEmail(req.params.email)) return res.status(404).send('Invalid Email'); // if the email does not exist
+router.post("/application/:course/:email", (req, res) => {
+    if(!sanitizeEmail(req.params.email) && !sanitizeInput(req.params.course) && !sanitizeInput(req.body)) return res.status(404).send('Invalid Email'); // if the email does not exist
 
-    const email = req.params.email;
-    const answers = req.body.answer;
     const appsJSON = JSON.parse(JSON.stringify(appsData));
     const courseJSON = JSON.parse(JSON.stringify(courseData));
-    const courseExists = courseJSON.findIndex(c => c.courseName == answers.base[0]);
+    const courseExists = courseJSON.findIndex(c => c.courseName == req.params.course);
 
     if(!(courseExists > 0)) return res.status(400).send("Course does not exist"); // if the course does not exist
 
     let TAapplication = {
-        email: email,
-        baseQuestions: answers.base
+        email: req.params.email,
+        name: req.body.name,
+        courseCode: req.params.course,
+        status: req.body.status,
+        hours: req.body.hours,
+        courseRank: req.body.courseRank,
+        instructorRank: null,
+        questions: []
     };
 
     appsJSON.push(TAapplication);
-    res.send("Application submitted");
     setData(appsJSON,appsFile);
-
+    res.send("Application submitted");
 })
 
 // Delete all TA applications DELETE

@@ -136,5 +136,15 @@
                 "answer": false
             }
         ]
+    },
+    {
+        "email": "test@uwo.ca",
+        "name": "Paul",
+        "courseCode": "SE3351B",
+        "status": 1,
+        "hours": 5,
+        "courseRank": 1,
+        "instructorRank": null,
+        "questions": []
     }
 ]
