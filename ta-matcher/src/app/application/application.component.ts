@@ -18,6 +18,7 @@ export class ApplicationComponent implements OnInit {
   activeUser = '';
   inst = false;
   admn = false;
+  labelPosition: 'before' | 'after' = 'before';
 
   subject = ''; // make upper case
   catalog = ''; // make upper case

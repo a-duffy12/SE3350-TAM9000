@@ -12,6 +12,7 @@ import { CreateQuestionComponent } from './create-question/create-question.compo
 import { CourseSearchComponent } from './course-search/course-search.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatchingComponent } from './matching/matching.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     CreateQuestionComponent,
     CourseSearchComponent,
     CreateQuestionComponent,
-    CourseSearchComponent
+    CourseSearchComponent,
+    MatchingComponent
   ],
   imports: [
     BrowserModule,

@@ -1,32 +1,3 @@
-<div class="form" *ngIf="this.isStudent">
-  <h2>Apply</h2>
-  <div>
-    Course:
-    <input [(ngModel)]="course" placeholder="Course e.g. SE2202A">
-  </div>
-  <div>
-    Have you taken this course before?
-    <select [(ngModel)]="courseTaken">
-      <option *ngFor="let x of options" [ngValue]="x.value">{{x.display}}</option>
-    </select>
-  </div>
-  <div *ngIf="courseTaken == true">
-    Where did you take this course?
-    <input [(ngModel)]="courseLoc" placeholder="University e.g. Western University">
-  </div>
-  <div>
-    Have you TA'd this course before?
-    <select [(ngModel)]="courseTAd">
-      <option *ngFor="let x of options" [ngValue]="x.value">{{x.display}}</option>
-    </select>
-  </div>
-  <div>
-    List any previous TA experience
-    <textarea [(ngModel)]="prevExp"></textarea>
-  </div>
-  <button (click)="submitApplication()">Submit</button>
-</div>
-
 <div *ngIf="admn">
   <h2>Add a TA Application</h2>
 
@@ -34,10 +5,10 @@
   Course Code: <input placeholder="ex. 3350" [(ngModel)]="catalog"><br><br>
   Course Extension: <input placeholder="ex. B" [(ngModel)]="extension"><br><br>
   Candidate Name: <input placeholder="ex. Alice" [(ngModel)]="name"><br><br>
-  Candidate Email: <input placeholder="ex alice@uwo.ca" [(ngModel)]="name"><br><br>
+  Candidate Email: <input placeholder="ex alice@uwo.ca" [(ngModel)]="email"><br><br>
   Status: <input placeholder="ex. 1" type="number" min="1" max="3" [(ngModel)]="status"><br><br>
-  TAed Before?: <mat-checkbox [labelPosition]="labelPosition" [(ngModel)]="newTA">><br><br>
+  <mat-checkbox [labelPosition]="labelPosition" [(ngModel)]="newTA">TAed Before?: </mat-checkbox><br><br>
   Preference Ranking: <input placeholder="ex.2" type="number" min="1" [(ngModel)]="courseRank"><br><br>
 
-  <button (click)="submitApplication">Submit Application</button>
+  <button (click)="submitApplication()">Submit Application</button>
 </div>

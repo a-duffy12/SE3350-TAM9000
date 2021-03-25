@@ -146,5 +146,15 @@
         "courseRank": 1,
         "instructorRank": null,
         "questions": []
+    },
+    {
+        "email": "test@uw0.ca",
+        "name": "test",
+        "courseCode": "SE3316A",
+        "status": 1,
+        "hours": 10,
+        "courseRank": 2,
+        "instructorRank": null,
+        "questions": []
     }
 ]
