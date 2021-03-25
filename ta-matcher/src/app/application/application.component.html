@@ -26,3 +26,18 @@
   </div>
   <button (click)="submitApplication()">Submit</button>
 </div>
+
+<div *ngIf="admn">
+  <h2>Add a TA Application</h2>
+
+  Course Catalog: <input placeholder="ex. SE" [(ngModel)]="subject"><br><br>
+  Course Code: <input placeholder="ex. 3350" [(ngModel)]="catalog"><br><br>
+  Course Extension: <input placeholder="ex. B" [(ngModel)]="extension"><br><br>
+  Candidate Name: <input placeholder="ex. Alice" [(ngModel)]="name"><br><br>
+  Candidate Email: <input placeholder="ex alice@uwo.ca" [(ngModel)]="name"><br><br>
+  Status: <input placeholder="ex. 1" type="number" min="1" max="3" [(ngModel)]="status"><br><br>
+  TAed Before?: <mat-checkbox [labelPosition]="labelPosition" [(ngModel)]="newTA">><br><br>
+  Preference Ranking: <input placeholder="ex.2" type="number" min="1" [(ngModel)]="courseRank"><br><br>
+
+  <button (click)="submitApplication">Submit Application</button>
+</div>
