@@ -51,8 +51,7 @@
         "enrolled": 610,
         "hoursLast": 30,
         "hours": 30,
-        "desc": "BUSINESS FOR ENGINEERS",
-        "applicantRanks": []
+        "desc": "BUSINESS FOR ENGINEERS"
     },
     {
         "courseName": "TE6969A",
@@ -63,8 +62,7 @@
         "hoursLast": 10,
         "hours": 70,
         "requireTA": "false",
-        "desc": "COOL KIDS ONLY CLUB",
-        "applicantRanks": []
+        "desc": "COOL KIDS ONLY CLUB"
     },
     {
         "courseName": "TE6969B",
@@ -75,7 +73,6 @@
         "hoursLast": 10,
         "hours": 70,
         "requireTA": false,
-        "desc": "COOL KIDS ONLY CLUB",
-        "applicantRanks": []
+        "desc": "COOL KIDS ONLY CLUB"
     }
 ]
