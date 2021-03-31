@@ -6,10 +6,10 @@
         <div>
             <a routerLink="/home">Home</a><br>
             <a routerLink="/">Login</a><br>
-            <a routerLink="/matching">TA Matching</a><br>
-            <a routerLink="/question" *ngIf="inst">Add Questions</a><br>
             <a routerLink="/course">Search for Courses</a><br>
-            <a routerLink="/application">Submit TA Application</a><br>
+            <a routerLink="/matching" *ngIf="inst || admn">TA Matching</a><br>
+            <a routerLink="/application" *ngIf="inst || admn">Submit TA Application</a><br>
+            <a routerLink="/question" *ngIf="inst">Add Questions</a><br>
         </div>
     </nav>
 
