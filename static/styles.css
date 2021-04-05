@@ -12,12 +12,23 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+body.light {
   background-color: rgb(180, 129, 228);
+  color: black;
+}
+
+
+body.dark {
+  background-color: rgb(36, 12, 58);
+  color: white;
 }
 
 
 h2 {
-  color:rgb(5, 6, 32);
+  color:rgb(52, 9, 61);
   padding-left: 100px;
 }
 
