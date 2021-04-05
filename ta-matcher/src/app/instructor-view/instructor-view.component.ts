@@ -50,6 +50,8 @@ export class InstructorViewComponent implements OnInit {
   subjectq = ''; // make upper case
   extensionq = ''; // make upper case
 
+  fileError = false;
+
   constructor(private http: HttpClient, private val: Validator, public data: ShareDataService)
   {
     // every second, update the active user variable
@@ -212,6 +214,17 @@ export class InstructorViewComponent implements OnInit {
       alert("Invalid input!");
     }
 
+  }
+
+  readFile(fileEvent: any)
+  {
+    const file = fileEvent.target.files[0];
+    if(file.type != "application/vnd.ms-excel" && file.type != "application/csv" && file.type != "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"){
+      this.fileError = true;
+    }
+    else{
+      this.fileError = false;
+    }
   }
 
   ngOnInit(): void {
