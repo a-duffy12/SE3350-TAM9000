@@ -17,19 +17,27 @@
 <script>
   let val = 0;
   document.body.classList.toggle("light");
+
   function myFunction() {
-    console.log(val);
+    var elem = document.getElementById("toggle-mode");
+    if (elem.innerHTML=="Dark Theme") {
+      elem.innerHTML = "Light Theme";
+    }
+    else {elem.innerHTML = "Dark Theme";
+    }
+
     if (val == 0) {
       document.body.classList.toggle("light");
       document.body.classList.toggle("dark");
+      document.getElementById("toggle-mode").value="Light theme";
       val = 1;
     }
     else if (val == 1) {
       document.body.classList.toggle("dark");
       document.body.classList.toggle("light");
+      document.getElementById("toggle-mode").value="Dark theme";
       val = 0;
     }
-    console.log(val);
   }
 </script>
 
