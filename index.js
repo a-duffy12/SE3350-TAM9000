@@ -3,6 +3,7 @@ const fs = require("fs"); // get fs module
 const cors = require("cors"); // get cors module
 const stringSimilarity = require("string-similarity"); // get string similarity module
 const bcrypt = require("bcrypt"); // get hashing module
+const fileUpload = require('express-fileupload');
 
 const userData = require("./data/accounts.json"); // json data for user accounts
 const appsData = require("./data/applications.json"); // json data for user applications
@@ -687,8 +688,7 @@ router.get("/download", (req, res) => {
 })
 
 router.post('/upload', (req, res) => {
-    let file = req['files'];
-    console.log("File uploaded: ", file);
+    console.log("File uploaded: ");
 })
 
 app.use("/api", router); // install router object path

@@ -231,7 +231,7 @@ export class InstructorViewComponent implements OnInit {
 
   uploadFile(fileToUpload: File){
     const formData: FormData = new FormData();
-    formData.append('file', fileToUpload);
+    formData.append('file', fileToUpload, fileToUpload.name);
     this.http.post(`/api/upload`, formData).subscribe(() => {
       alert("Upload successful");
     }, error => {
