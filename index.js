@@ -3,6 +3,7 @@ const fs = require("fs"); // get fs module
 const cors = require("cors"); // get cors module
 const stringSimilarity = require("string-similarity"); // get string similarity module
 const bcrypt = require("bcrypt"); // get hashing module
+const fileUpload = require('express-fileupload');
 
 const userData = require("./data/accounts.json"); // json data for user accounts
 const appsData = require("./data/applications.json"); // json data for user applications
@@ -684,6 +685,10 @@ router.get("/download", (req, res) => {
     res.setHeader('Content-Type', 'text/csv');
     res.setHeader('Content-Disposition', 'attachment; filename=exportQuestions.csv');
     file.pipe(res);
+})
+
+router.post('/upload', (req, res) => {
+    console.log("File uploaded: ");
 })
 
 app.use("/api", router); // install router object path

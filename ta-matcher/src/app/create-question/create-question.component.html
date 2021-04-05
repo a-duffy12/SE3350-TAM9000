@@ -1,8 +1,4 @@
 <div>
   {{id.display}}
   <input class="question" type="text" [(ngModel)]="data.questions[id.num].question">
-  Preferred Answer:
-  <select [(ngModel)]='data.questions[id.num].preferredAnswer'>
-    <option *ngFor="let bool of boolean" [ngValue]="bool.value">{{bool.display}}</option>
-  </select>
 </div>

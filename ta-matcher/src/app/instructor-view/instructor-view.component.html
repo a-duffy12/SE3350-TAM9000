@@ -51,8 +51,9 @@
   <h2>Import Applicant Data</h2>
   <br /><br />
   <label for="file">Choose File</label>
-  <input type="file" id="file" /> <br/><br/>
-  <button>Upload</button>
+  <input type="file" id="file" (change)="readFile($event)"/> <br/><br/>
+  <div *ngIf="this.fileError">Please upload an excel or a csv file</div>
+  <button *ngIf="this.fileError == false" (click)="uploadFile(this.fileToUpload)">Upload</button>
 </div>
 
 <div *ngIf="admn">
@@ -65,6 +66,11 @@
   Hours: <input placeholder="ex. 20" [(ngModel)]="newHours" /><br /><br />
 
   <button (click)="Override()">Override allocated hours</button>
+</div>
+
+<div *ngIf = "admn">
+  <h2>Export Course Questions</h2><br><br>
+  <button (click)="exportQuestions()">Download Questions</button>
 </div>
 
 <div *ngIf="inst">
