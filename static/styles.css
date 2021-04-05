@@ -28,8 +28,9 @@ body.dark {
 
 
 h2 {
-  color:rgb(52, 9, 61);
+  color:rgb(82, 52, 88);
   padding-left: 100px;
+  text-shadow: -1px -1px 0 rgb(255, 255, 255), 1px -1px 0 rgb(255, 255, 255), -1px 1px 0 rgb(255, 255, 255), 1px 1px 0 rgb(255, 255, 255);
 }
 
 
@@ -61,67 +62,31 @@ a:active {
 }
 
 
-.switch {
-  position: relative;
+button {
+  background-color: #4e8f9b;
+  border: none;
+  color: black;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
   display: inline-block;
-  width: 60px;
-  height: 34px;
-}
-
-
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-
-.toggle {
-  position: absolute;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
   cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: .4s;
 }
 
 
-.toggle:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  transition: .4s;
+.button1 {
+  background-color: #4e8f9b;
+  color: black;
+  border: 2px solid white;
 }
 
 
-input:checked + .toggle {
-  background-color: #2196F3;
-}
-
-
-input:focus + .toggle {
-  box-shadow: 0 0 1px #2196F3;
-}
-
-
-input:checked + .toggle:before {
-  transform: translateX(26px);
-}
-
-
-.toggle.round {
-  border-radius: 34px;
-}
-
-
-.toggle.round:before {
-  border-radius: 50%;
+.button1:hover {
+  background-color: #55ac58;
+  color: white;
 }
 
 
