@@ -51,6 +51,7 @@ export class InstructorViewComponent implements OnInit {
   extensionq = ''; // make upper case
 
   fileError = false;
+  fileToUpload: File;
 
   constructor(private http: HttpClient, private val: Validator, public data: ShareDataService)
   {
@@ -224,7 +225,18 @@ export class InstructorViewComponent implements OnInit {
     }
     else{
       this.fileError = false;
+      this.fileToUpload = file;
     }
+  }
+
+  uploadFile(fileToUpload: File){
+    const formData: FormData = new FormData();
+    formData.append('file', fileToUpload);
+    this.http.post(`/api/upload`, formData).subscribe(() => {
+      alert("Upload successful");
+    }, error => {
+      alert(error)
+    })
   }
 
   ngOnInit(): void {

@@ -686,6 +686,11 @@ router.get("/download", (req, res) => {
     file.pipe(res);
 })
 
+router.post('/upload', (req, res) => {
+    let file = req['files'];
+    console.log("File uploaded: ", file);
+})
+
 app.use("/api", router); // install router object path
 
 // get PORT environment variable, or use 3000 if not available

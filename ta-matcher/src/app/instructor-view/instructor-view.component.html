@@ -53,7 +53,7 @@
   <label for="file">Choose File</label>
   <input type="file" id="file" (change)="readFile($event)"/> <br/><br/>
   <div *ngIf="this.fileError">Please upload an excel or a csv file</div>
-  <button *ngIf="this.fileError == false">Upload</button>
+  <button *ngIf="this.fileError == false" (click)="uploadFile(this.fileToUpload)">Upload</button>
 </div>
 
 <div *ngIf="admn">
