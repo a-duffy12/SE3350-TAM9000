@@ -68,6 +68,11 @@
   <button (click)="Override()">Override allocated hours</button>
 </div>
 
+<div *ngIf = "admn">
+  <h2>Export Course Questions</h2><br><br>
+  <button (click)="exportQuestions()">Download Questions</button>
+</div>
+
 <div *ngIf="inst">
   <h2>Rank applicants</h2>
   <br /><br />
