@@ -19,7 +19,7 @@ body.dark {
 }
 h2 {
   color:rgb(82, 52, 88);
-  padding-left: 0px;
+  padding-left: 50px;
   text-shadow: -1px -1px 0 rgb(255, 255, 255), 1px -1px 0 rgb(255, 255, 255), -1px 1px 0 rgb(255, 255, 255), 1px 1px 0 rgb(255, 255, 255);
 }
 a:link {
